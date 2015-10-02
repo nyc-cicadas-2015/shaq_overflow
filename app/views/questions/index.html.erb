@@ -1,3 +1,11 @@
+ <% if logged_in? %>
+  <li><%= link_to "Create Post", new_post_path %></li>
+  <li><%= link_to "Logout", logout_path, method: :delete, id: "logout-link" %></li>
+<% else %>
+  <li><%= link_to "login", '/login' %></li>
+  <li><%= link_to "Sign Up", '/users/new' %></li>
+<% end %>
+
 <h1>Questions</h1>
 
 <% @questions.each do |question| %>
