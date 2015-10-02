@@ -1,11 +1,17 @@
 require 'rails_helper'
 
-describe "question" do
-  it "Sample test" do
-    expect(1).to eq(1)
+describe "question index page" do
+  # let(:user) { create(:user) }
+  let!(:question) { create(:question) }
+  let!(:questions) { [question, create(:question)] }
+
+  it "show all questions on questions page" do
+    visit root_path
+    questions.each do |question|
+      expect(page).to have_content question.title
+    end
   end
 end
-
 describe ' a new question page' do
   it 'see if question form exists on page' do
     visit root_path
