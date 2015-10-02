@@ -1,7 +1,9 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-describe QuestionsController do
+# describe QuestionsController do
 
-describe "GET #new" do
+# describe "GET #new" do
 
-end
+# end
+
+# end

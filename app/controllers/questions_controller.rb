@@ -10,14 +10,18 @@ class QuestionsController < ApplicationController
 
   def create
     user = current_user
-    user.questions.create(question_params)
-    redirect root_path
+    if user
+      user.questions.create(question_params)
+      redirect_to root_path
+    else
+      puts "nah"
+    end
   end
 
   private
 
   def question_params
-    params.require(:question).permit(:body)
+    params.require(:question).permit(:body,:title)
   end
 
 end
