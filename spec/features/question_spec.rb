@@ -50,10 +50,32 @@ end
 
 describe 'question show page' do
   let!(:question) { create(:question) }
-  let(:question_attributes) { attributes_for(:question) }
   it 'shows question' do
     visit question_path(question)
     expect(page).to have_content question.title
+    expect(page).to have_content question.body
+  end
+
+  it 'should show link to add response to question' do
+    visit question_path(question)
+    expect(page).to have_link("add a response")
+  end
+
+  it 'should show link to add answer' do
+    visit question_path(question)
+    expect(page).to have_content("Post your answer")
+  end
+
+  xit 'should show tags related to question' do
+  end
+
+  xit 'should show votes for question' do
+  end
+
+  xit 'should show votes for answer' do
+  end
+
+  xit 'should show votes for response' do
   end
 end
 
