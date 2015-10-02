@@ -16,7 +16,7 @@ describe ' a new question page' do
   it 'see if question form exists on page' do
     visit root_path
     click_link("Ask question")
-    expect(page).to have_content ("Create a question")
+    expect(page).to have_content ("Create new question")
   end
 
 
