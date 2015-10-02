@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
 
   root 'questions#index'
-<<<<<<< HEAD
-=======
   resource :questions
->>>>>>> Can visit a new question page
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
