@@ -5,11 +5,3 @@
   <li><%= link_to "login", '/login' %></li>
   <li><%= link_to "Sign Up", '/users/new' %></li>
 <% end %>
-
-<h1>Questions</h1>
-
-<% @questions.each do |question| %>
-  <%= question.title %>
-<% end %>
-
-<%= link_to "Ask question", new_questions_path %>
