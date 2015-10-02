@@ -29,19 +29,28 @@ describe ' a new question page' do
 }
 
 
-it 'see if question form exists on page' do
-  visit root_path
-  click_link("Ask question")
-  expect(page).to have_content ("Create new question")
+  it 'see if question form exists on page' do
+    visit root_path
+    click_link("Ask question")
+    expect(page).to have_content ("Create new question")
+  end
+
+  it 'see if we can create a question' do
+    log_me_in
+    visit root_path
+    click_link("Ask question")
+    fill_in 'Body', :with => question_attr[:body]
+    fill_in 'Title', :with => question_attr[:title]
+    click_button('Submit')
+    expect(page).to have_content question_attr[:title]
+  end
+
 end
 
-it 'see if we can create a question' do
-  log_me_in
-  visit root_path
-  click_link("Ask question")
-  fill_in 'Body', :with => question_attr[:body]
-  fill_in 'Title', :with => question_attr[:title]
-  click_button('Submit')
-  expect(page).to have_content question_attr[:title]
-end
+describe 'question show page' do
+  let!(:question) { create(:question) }
+  it 'shows question' do
+    visit question_path(question)
+    expect(page).to have_content question.title
+  end
 end
