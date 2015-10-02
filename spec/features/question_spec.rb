@@ -4,13 +4,12 @@ describe "question index page" do
   let!(:question) { create(:question) }
   let!(:questions) { [question, create(:question)] }
 
-  it "show all questions on questions page" do
+  it "shows all questions on page" do
     visit root_path
     questions.each do |question|
       expect(page).to have_content question.title
     end
   end
-end
 
 describe ' a new question page' do
 
@@ -29,10 +28,13 @@ describe ' a new question page' do
 }
 
 
-  it 'see if question form exists on page' do
+  it "links to correct question's pages" do
     visit root_path
-    click_link("Ask question")
-    expect(page).to have_content ("Create new question")
+    click_on question.title
+    expect(current_path).to eq question_path(question)
+    expect(page).to have_content question.title
+    expect(page).to have_content question.body
+    expect(page).to_not have_content questions.last.title
   end
 
   it 'see if we can create a question' do
@@ -44,13 +46,24 @@ describe ' a new question page' do
     click_button('Submit')
     expect(page).to have_content question_attr[:title]
   end
-
 end
 
 describe 'question show page' do
   let!(:question) { create(:question) }
+  let(:question_attributes) { attributes_for(:question) }
   it 'shows question' do
     visit question_path(question)
     expect(page).to have_content question.title
   end
 end
+
+
+describe ' a new question page' do
+  it 'see if question form exists on page' do
+    visit root_path
+    click_link("Ask question")
+    expect(page).to have_content ("Create new question")
+  end
+
+end
+
