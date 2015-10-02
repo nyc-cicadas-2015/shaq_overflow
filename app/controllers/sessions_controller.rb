@@ -7,11 +7,12 @@ class SessionsController < ApplicationController
 		user = User.find_by(username: params[:user][:username])
     if user
       session[:user_id] = user.id
-      redirect_to '/'
+      redirect_to root_path
     else
       flash[:invalid_login] = "Unable to find password & username combination"
-      redirect_to '/users/new'
+      redirect_to root_new_users
     end
-
 	end
+
+
 end
