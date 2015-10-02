@@ -1,4 +1,4 @@
-Rails.application.routes.draw doe
+Rails.application.routes.draw do
   root 'question#index'
   resource :questions
   resource :users
