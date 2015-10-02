@@ -1,3 +1,3 @@
-jenny = User.create(username: "jlee", name: "Jenny Lee", password: "jenny")
-mark = User.create(username: "markymark", name: "Mark Miller", password: "mark")
-navraj = User.create(username: "rajtree", name: "Navraj Nat", password: "navraj")
+jenny = User.create(username: "jlee4three", name: "Jenny Lee", password: "jenny")
+mark = User.create(username: "markymarkandthefunkybunch", name: "Mark Miller", password: "mark")
+navraj = User.create(username: "therajtree", name: "Navraj Nat", password: "navraj")
