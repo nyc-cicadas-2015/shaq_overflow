@@ -16,6 +16,16 @@ describe ' a new question page' do
 
  let(:question_attr){attributes_for(:question)}
 
+let(:log_me_in) {
+    visit new_user_path
+    within("#user_login_form") do
+      fill_in 'Username', :with => user[:username]
+      fill_in 'Password', :with => user[:password]
+    end
+
+
+ user = create(:user)
+
   it 'see if question form exists on page' do
     visit root_path
     click_link("Ask question")
@@ -23,8 +33,6 @@ describe ' a new question page' do
   end
 
   it 'see if we can create a question' do
-  # let(:user_attr){attributes_for(:user)}
-
   visit root_path
   click_link("Ask question")
   fill_in 'Body', :with => question_attr[:body]
