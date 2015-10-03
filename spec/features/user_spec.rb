@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe 'Logging in Process' do
 	let(:log_me_in) {
   	user = create(:user)
@@ -11,20 +13,25 @@ describe 'Logging in Process' do
 
   describe "If user is not logged in" do
     it 'should have a sign up link' do
-      visit root_url
+      visit root_path
       expect(page).to have_content('Sign Up')
       expect(page).to have_content('Login')
     end
+  end
 
+  describe "if user is logged in" do
     it 'should have a sign up link' do
-    	log_me_in
-      visit root_url
+      log_me_in
       expect(page).to have_content('Create Post')
       expect(page).to have_content('Logout')
     end
-  end
-  describe "if user is logged in" do
-    it ""
+
+    it "should log me out" do
+      log_me_in
+      click_link 'Logout'
+      # expect(page).to have_content('Sign Up')
+      # expect(page).to have_content('Login')
+    end
   end
 
 
