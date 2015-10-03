@@ -25,10 +25,13 @@ describe SessionsController do
       it "expect a confirmation flash message" do
       	expect(flash[:message]).to have_content "You succesfully logged in"
       end
-
 		end
 
 		describe "When unsuccesful" do
+      it "redirect to login page" do 
+        post :create, session: { username: 'nil', password: 'nil' }
+        expect(response).to redirect_to(login_path)
+      end
 
 		end
 	end
