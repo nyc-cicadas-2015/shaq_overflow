@@ -4,7 +4,9 @@ describe QuestionsController do
 
 let(:log_in) {
         user = create(:user)
-        post :create, :params  { username: user[:username], password: user[:password] }
+        post :create, user:
+post :create, session:{ username: user[:username], password: user[:password] }
+      binding.pry
       }
 
   describe "GET index" do
