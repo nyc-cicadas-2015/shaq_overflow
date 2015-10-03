@@ -44,4 +44,8 @@ describe SessionsController do
       end
 		end
 	end
+  describe "DELETE #destroy" do
+    
+  end
 end
+
