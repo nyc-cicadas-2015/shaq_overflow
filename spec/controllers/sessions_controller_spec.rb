@@ -14,7 +14,7 @@ describe SessionsController do
       	expect(response).to redirect_to(root_path)
       end
 
-      it "sets session properly" do 
+      it "sets a session" do 
       	expect(session).to have_key(:user_id)
       end
 
