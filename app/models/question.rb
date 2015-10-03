@@ -6,4 +6,11 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :responses, as: :respondable
 
+  def check_for_empty_fields?
+    self.title == "" || self.body == ""
+  end
+
+
+
 end
+

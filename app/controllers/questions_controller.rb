@@ -15,10 +15,15 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    user = current_user
-    if user
-      user.questions.create(question_params)
-      redirect_to root_path
+    if current_user
+      question = current_user.questions.build(question_params)
+      if question.check_for_empty_fields?
+        flash[:input] = "Please input information"
+        redirect_to new_question_path
+      else
+        question.save
+        redirect_to root_path
+      end
     else
       flash[:login] = "You must login in order to create a post"
       redirect_to login_path
@@ -32,13 +37,24 @@ class QuestionsController < ApplicationController
   def update
     question = Question.find(params[:id])
     question.update(question_params)
+    if question.check_for_empty_fields?
+     flash[:input] = "Please input information"
+     redirect_to edit_question_path(question)
+   else
     redirect_to root_path
   end
+end
 
-  private
+def destroy
+  question = Question.find(params[:id])
+  question.destroy
+  redirect_to root_path
+end
 
-  def question_params
-    params.require(:question).permit(:body,:title)
-  end
+private
+
+def question_params
+  params.require(:question).permit(:body,:title)
+end
 
 end
