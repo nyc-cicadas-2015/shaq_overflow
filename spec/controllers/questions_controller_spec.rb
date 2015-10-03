@@ -33,16 +33,27 @@ let(:login_page){LoginPageHelper.new}
   end
 
   describe "POST create" do
+
+    before(:each) {
+        @user = create(:user)
+        session[:user_id] = @user.id
+      }
+
    context "with valid attributes" do
     it "saves the new contact in the database" do
         expect{
-        user = create(:user)
-        session[:user_id] = user.id
         post :create, question:attributes_for(:question)
         }.to change(Question,:count).by(1)
       end
     end
+
+    context "with invalid attributes" do
+      it "redirects to same page with flash message" do
+        post :create, question: {title:"", body:""}
+        expect(flash[:input]).to have_content("Please input information")
+      end
   end
+end
 
 
 end

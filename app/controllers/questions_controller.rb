@@ -15,10 +15,15 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    user = current_user
-    if user
-      user.questions.create(question_params)
-      redirect_to root_path
+    if current_user
+      question = current_user.questions.build(question_params)
+      if question.check_for_empty_fields?
+        flash[:input] = "Please input information"
+        redirect_to new_question_path
+      else
+        question.save
+        redirect_to root_path
+      end
     else
       flash[:login] = "You must login in order to create a post"
       redirect_to login_path
