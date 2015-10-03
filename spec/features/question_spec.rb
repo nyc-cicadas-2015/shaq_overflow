@@ -16,17 +16,19 @@ describe ' a new question page' do
  let(:question_attr){attributes_for(:question)}
 
  let(:log_me_in) {
-   user = create(:user)
+   @user = create(:user)
    visit login_path
    within("#login") do
-    fill_in 'Username', :with => user[:username]
-    fill_in 'Password', :with => user[:password]
+    fill_in 'Username', :with => @user.username
+    fill_in 'Password', :with => @user.password
     click_button 'Login'
   end
 }
 
  let(:create_question) {
+  log_me_in
   question = create(:question)
+  question.update_attributes(user_id: @user.id)
  }
 
 
@@ -51,7 +53,6 @@ describe ' a new question page' do
 
   it 'to change its information' do
       create_question
-      log_me_in
       visit question_path(question)
       click_on "Edit question"
       fill_in "Title", :with => "Test"
