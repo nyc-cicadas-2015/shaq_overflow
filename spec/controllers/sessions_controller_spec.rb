@@ -5,7 +5,7 @@ describe SessionsController do
 
 		describe "When succesful" do
 			before(:each) {
-        user = create(:user)
+        @user = create(:user) #Why is this @user and not user?  It stops working if I do it otherwise
         post :create, session: { username: user[:username], password: user[:password] }
       }
       let(:user) { attributes_for(:user) }
