@@ -1,6 +1,10 @@
+<h4>Please Register below</h4>
+
 <%= form_for @user do |f| %>
   <%= f.text_field :name, placeholder: "Name" %>
+  <div class="spacer"></div>
   <%= f.text_field :username, placeholder: "Username" %>
+  <div class="spacer"></div>
   <%= f.password_field :password, placeholder: "Password" %>
   <div class="spacer"></div>
   <%= f.submit "Register" %>
