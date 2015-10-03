@@ -45,7 +45,11 @@ describe SessionsController do
 		end
 	end
   describe "DELETE #destroy" do
-    
+    it "removes the session[:user_id]" do
+      session[:user_id] = 1
+      delete :destroy
+      expect(session[:user_id]).to be_nil
+    end
   end
 end
 
