@@ -33,6 +33,11 @@ describe SessionsController do
         expect(response).to redirect_to(login_path)
       end
 
+      it "no session is set" do
+        post :create, session: { username: 'nil', password: 'nil' }
+        expect(session[:user_id]).to be_nil
+      end
+
 		end
 	end
 end
