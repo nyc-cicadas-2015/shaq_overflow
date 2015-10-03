@@ -1,1 +1,7 @@
-I exist
+<%= form_for @user do |f| %>
+  <%= f.text_field :name, placeholder: "Name" %>
+  <%= f.text_field :username, placeholder: "Username" %>
+  <%= f.password_field :password, placeholder: "Password" %>
+  <div class="spacer"></div>
+  <%= f.submit "Register" %>
+<% end %>
