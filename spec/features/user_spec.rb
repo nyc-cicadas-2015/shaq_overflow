@@ -33,6 +33,11 @@ describe 'Logging in Process' do
       expect(page).to have_content('Login')
     end
   end
+end
 
-
+describe "Sign Up Process" do 
+  it "A guest can sign up" do 
+    visit root_path
+    click_link 'Sign Up'
+  end
 end
