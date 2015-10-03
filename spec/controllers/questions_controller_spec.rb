@@ -2,12 +2,7 @@ require 'rails_helper'
 
 describe QuestionsController do
 
-let(:log_in) {
-        user = create(:user)
-        post :create, user:
-post :create, session:{ username: user[:username], password: user[:password] }
-      binding.pry
-      }
+let(:login_page){LoginPageHelper.new}
 
   describe "GET index" do
     it "assigns @questions" do
@@ -40,10 +35,13 @@ post :create, session:{ username: user[:username], password: user[:password] }
   describe "POST create" do
    context "with valid attributes" do
     it "saves the new contact in the database" do
-      expect{
-        log_in
-        post :create, question:attributes_for(:question)
-        }.to change{Question.count}.by(1)
+      # expect{
+        user = create(:user)
+        login_page.visit_page.login(user)
+        expect(page).to have_content("Unable to find password & username combination")
+
+        # post :create, question:attributes_for(:question)
+        # }.to change{Question.count}.by(1)
       end
     end
   end
