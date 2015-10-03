@@ -29,6 +29,7 @@ class QuestionsController < ApplicationController
   def update
     question = Question.find(params[:id])
     question.update(question_params)
+    redirect_to root_path
   end
 
   private

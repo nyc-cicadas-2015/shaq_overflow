@@ -48,6 +48,19 @@ describe ' a new question page' do
     click_button('Submit')
     expect(page).to have_content question_attr[:title]
   end
+
+  it 'to change its information' do
+      create_question
+      log_me_in
+      visit question_path(question)
+      click_on "Edit question"
+      fill_in "Title", :with => "Test"
+      fill_in "Body", :with => "Is working"
+      click_button "Submit"
+      expect(page).to have_content "Test"
+  end
+
+
 end
 
 describe 'question show page' do
@@ -90,20 +103,6 @@ describe ' a new question page' do
   end
 
 end
-
-  it 'to change its information' do
-      create_question
-      log_me_in
-      click_link question_path(question)
-      click_on "Edit question"
-      fill_in "Title", :with => "Test"
-      fill_in "Body", with => "Is working"
-      click_button "Update"
-      expect(page).to have_content "Test"
-  end
-
-
-
 end
 
 
