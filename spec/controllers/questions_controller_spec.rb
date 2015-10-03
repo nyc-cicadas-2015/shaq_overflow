@@ -35,13 +35,11 @@ let(:login_page){LoginPageHelper.new}
   describe "POST create" do
    context "with valid attributes" do
     it "saves the new contact in the database" do
-      # expect{
+        expect{
         user = create(:user)
-        login_page.visit_page.login(user)
-        expect(page).to have_content("Unable to find password & username combination")
-
-        # post :create, question:attributes_for(:question)
-        # }.to change{Question.count}.by(1)
+        session[:user_id] = user.id
+        post :create, question:attributes_for(:question)
+        }.to change(Question,:count).by(1)
       end
     end
   end

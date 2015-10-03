@@ -1,23 +1,25 @@
-require "rails_helper"
+# require "rails_helper"
 
-describe AnswersController do
-  let(:login_page) { LoginPageHelper.new }
+# describe AnswersController do
+#   let(:login_page) { LoginPageHelper.new }
 
-  describe "GET #create" do
-    describe "When successful" do
-      before(:each) {
-        @user = create(:user)
-        login_page.visit_page.login(@user)
-        @question = create(:question)
-      }
-      let(:question_attr) { attributes_for(:question) }
-      let(:answer_attr) { attributes_for(:answer) }
+#   describe "GET #create" do
+#     describe "When successful" do
+#       before(:each) {
+#         @user = create(:user)
+#         session[:user_id] = @user.id
+#       }
+#       let(:question_attr) { attributes_for(:question) }
+#       let(:answer_attr) { attributes_for(:answer) }
 
-      it "posts answer onto question page" do
-        expect(assigns(@question.answers.last.body)).to eq answer_attr[:body]
-      end
+#       it "posts answer onto question page" do
+#         expect{
+#           question = create(:question)
+#           post :create, answer: attributes_for(:answer)
+#           }.to change(Answer,:count).by(1)
+#         end
 
-    end
-  end
-end
+#       end
+#     end
+#   end
 
