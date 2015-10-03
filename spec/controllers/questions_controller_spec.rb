@@ -32,17 +32,17 @@ let(:login_page){LoginPageHelper.new}
     end
   end
 
-  # describe "POST create" do
-  #  context "with valid attributes" do
-  #   it "saves the new contact in the database" do
-  #     # expect{
-  #       user = create(:user)
-  #       login_page.visit_page.login(user)
-  #       post :create, question:attributes_for(:question)
-  #       }.to change{Question.count}.by(1)
-  #     end
-  #   end
-  # end
+  describe "POST create" do
+   context "with valid attributes" do
+    it "saves the new contact in the database" do
+        expect{
+        user = create(:user)
+        session[:user_id] = user.id
+        post :create, question:attributes_for(:question)
+        }.to change(Question,:count).by(1)
+      end
+    end
+  end
 
 
 end
