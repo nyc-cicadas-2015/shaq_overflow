@@ -2,7 +2,12 @@
 <p><%= @question.body %></p>
 
 <%= link_to "add a response", "/responses/new" %>
-<%= link_to "Post your answer", "/answers/new" %>
+
+<%= form_for @answer do |f| %>
+  <%= f.label  %>
+  <%= f.text_field :body %>
+  <%= f.submit "Post answer" %>
+<% end %>
 
 <%= link_to "Edit question", edit_question_path(@question) %>
 
