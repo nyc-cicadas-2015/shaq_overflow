@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = "Unable to find password & username combination"
-      redirect_to root_new_users
+      redirect_to login_path
     end
 	end
 

@@ -1,6 +1,12 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
 
+<% @question.answers.each do |answer| %>
+  <%= answer.body %>
+<% end %>
+
+<div class="spacer"></div>
+
 <%= link_to "add a response", "/responses/new" %>
 
 <h2>Answer:</h2>

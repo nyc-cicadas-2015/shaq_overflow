@@ -16,9 +16,11 @@ describe "answer box" do
   it "can create answer to question" do
     log_me_in
     visit question_path(question)
-    fill_in 'body', :with => answer_attr[:body]
+    within("#new_answer") do
+      fill_in 'answer_body', :with => answer_attr[:body]
+    end
     click_button 'Post answer'
-    expect(page).to have_content answer.body
+    expect(page).to have_content answer_attr[:body]
   end
 
 end
