@@ -45,6 +45,12 @@ describe SessionsController do
 		end
 	end
   describe "DELETE #destroy" do
+    it "redirects homepage" do 
+      session[:user_id] = 1
+      delete :destroy
+      expect(response).to redirect_to(root_path)
+    end
+
     it "removes the session[:user_id]" do
       session[:user_id] = 1
       delete :destroy
