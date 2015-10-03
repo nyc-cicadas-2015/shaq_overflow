@@ -7,17 +7,19 @@
 #     describe "When successful" do
 #       before(:each) {
 #         @user = create(:user)
-#         login_page.visit_page.login(@user)
-#         @question = create(:question)
+#         session[:user_id] = @user.id
 #       }
 #       let(:question_attr) { attributes_for(:question) }
 #       let(:answer_attr) { attributes_for(:answer) }
 
 #       it "posts answer onto question page" do
-#         expect(assigns(@question.answers.last.body)).to eq answer_attr[:body]
-#       end
+#         expect{
+#           question = create(:question)
+#           post :create, answer: attributes_for(:answer)
+#           }.to change(Answer,:count).by(1)
+#         end
 
+#       end
 #     end
 #   end
-# end
 
