@@ -43,3 +43,34 @@ describe "answer box" do
   end
 
 end
+
+describe "edit answer" do
+  let!(:question) { create(:question) }
+  let(:answer_attr) { attributes_for(:answer) }
+  let(:log_me_in) {
+    user = create(:user)
+    visit login_path
+    within("#login") do
+      fill_in 'Username', :with => user.username
+      fill_in 'Password', :with => user.password
+      click_button 'Login'
+    end
+  }
+
+  it "shows edit box" do
+    log_me_in
+    visit question_path(question)
+    click_link "Edit answer"
+    expect(page).to have_field("Edit answer")
+  end
+
+  it "updates answer" do
+    log_me_in
+    visit question_path(question)
+    click_link "Edit answer"
+    fill_in "answer_body", :with => "Updated answer"
+    click_button "Update Answer"
+    expect(page).to have_content("Updated answer")
+  end
+
+end
