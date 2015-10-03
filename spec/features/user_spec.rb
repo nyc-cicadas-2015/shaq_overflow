@@ -4,5 +4,10 @@ describe 'Creating a user' do
       visit root_url
       expect(page).to have_content('Sign Up')
     end
+
+    it 'should have a Login link' do
+      visit root_url
+      expect(page).to have_content('Login')
+    end
   end
 end
