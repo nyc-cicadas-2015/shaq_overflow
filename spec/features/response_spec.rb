@@ -22,7 +22,7 @@ describe 'response form' do
     within("new_response") do
       fill_in 'response_body', :with => response_attr[:body]
     end
-    click_button 'Post response'
+    click_button 'Post response!'
     expect(page).to have_content response_attr[:body]
   end
 end
