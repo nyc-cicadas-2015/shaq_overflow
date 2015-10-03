@@ -4,7 +4,7 @@
 <%= link_to "add a response", "/responses/new" %>
 
 <%= form_for @answer do |f| %>
-  <%= f.label  %>
+  <%= f.label "Answer" %>
   <%= f.text_field :body %>
   <%= f.submit "Post answer" %>
 <% end %>
