@@ -78,9 +78,9 @@ describe 'question show page' do
     expect(page).to have_link("add a response")
   end
 
-  it 'should show link to add answer' do
+  it 'should show button to add answer' do
     visit question_path(question)
-    expect(page).to have_content("Post answer")
+    expect(page).to have_button("Post answer")
   end
 
   it 'should show answers related to question' do

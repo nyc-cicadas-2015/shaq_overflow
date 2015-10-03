@@ -16,9 +16,30 @@ describe "answer box" do
   it "can create answer to question" do
     log_me_in
     visit question_path(question)
-    fill_in 'body', :with => answer_attr[:body]
+    within("#new_answer") do
+      fill_in 'answer_body', :with => answer_attr[:body]
+    end
     click_button 'Post answer'
-    expect(page).to have_content answer.body
+    expect(page).to have_content answer_attr[:body]
+  end
+
+  it "does not submit empty answer" do
+    log_me_in
+    visit question_path(question)
+    within("#new_answer") do
+      fill_in 'answer_body', :with => nil
+    end
+    click_button 'Post answer'
+    expect(page).to have_content("Answer field cannot be empty")
+  end
+
+  it "does not submit answer if user not logged in" do
+    visit question_path(question)
+    within("#new_answer") do
+      fill_in 'answer_body', :with => "this shouldn't show up!"
+    end
+    click_button 'Post answer'
+    expect(question_path(question)).to_not have_content("this shouldn't show up!")
   end
 
 end
