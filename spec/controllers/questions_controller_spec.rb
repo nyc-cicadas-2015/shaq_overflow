@@ -55,5 +55,24 @@ let(:login_page){LoginPageHelper.new}
   end
 end
 
+describe "PUT update" do
+ before(:each) {
+        @user = create(:user)
+        session[:user_id] = @user.id
+        @question = create(:question)
+      }
+
+context "valid attributes" do
+
+it "changes @question's attributes" do
+      put :update, id: @question,
+        question: attributes_for(:question, title: "Updated title", body: "Updated body", user_id: @user.id)
+      @question.reload
+      @question.title.should eq("Updated title")
+      @question.body.should eq("Updated body")
+    end
+  end
+end
+
 
 end
