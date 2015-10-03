@@ -33,4 +33,13 @@ describe "answer box" do
     expect(page).to have_content("Answer field cannot be empty")
   end
 
+  it "does not submit answer if user not logged in" do
+    visit question_path(question)
+    within("#new_answer") do
+      fill_in 'answer_body', :with => "this shouldn't show up!"
+    end
+    click_button 'Post answer'
+    expect(question_path(question)).to_not have_content("this shouldn't show up!")
+  end
+
 end
