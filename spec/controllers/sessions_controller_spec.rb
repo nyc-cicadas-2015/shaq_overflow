@@ -13,7 +13,10 @@ describe SessionsController do
       it "redirects homepage" do 
       	expect(response).to redirect_to(root_path)
       end
-      # succesful login redirect path built
+
+      it "sets session properly" do 
+      	expect(session).to have_key(:user_id)
+      end
 
 		end
 
