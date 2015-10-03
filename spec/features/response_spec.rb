@@ -2,11 +2,9 @@ require 'rails_helper'
 
 describe 'response form' do
   before(:each){
-    create_question
     log_me_in
   }
 
-  let(:create_question) {create(:question)}
   let(:log_me_in) {
     user = create(:user)
     visit login_path
@@ -16,14 +14,15 @@ describe 'response form' do
       click_button 'Login'
     end
   }
-
-   let(:response_attr){attributes_for(:response)}
+  let(:response_attr){attributes_for(:response)}
 
   it "to see if it is on the page" do
-    create_question
+    question = create(:question)
     visit question_path(question)
     within("new_response") do
-      fill_in 'response_body', :with => response_attr[:]
-
+      fill_in 'response_body', :with => response_attr[:body]
+    end
+    click_button 'Post response'
+    expect(page).to have_content response_attr[:body]
   end
-
+end
