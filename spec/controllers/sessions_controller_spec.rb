@@ -22,21 +22,24 @@ describe SessionsController do
       	expect(session[:user_id]).to eq(@user.id)
       end
 
-      it "expect a confirmation flash message" do
+      it "expects a message flash" do
       	expect(flash[:message]).to have_content "You succesfully logged in"
       end
 		end
 
 		describe "When unsuccesful" do
-      it "redirect to login page" do 
+      before(:each){
         post :create, session: { username: 'nil', password: 'nil' }
+      }
+      it "redirect to login page" do 
         expect(response).to redirect_to(login_path)
       end
 
       it "no session is set" do
-        post :create, session: { username: 'nil', password: 'nil' }
         expect(session[:user_id]).to be_nil
       end
+
+      it "expects an error flash"
 
 		end
 	end
