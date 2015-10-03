@@ -55,7 +55,7 @@ describe QuestionsController do
       end
     end
 
-    describe "PUT update" do
+    describe "PUT update and DELETE destroy" do
      before(:each) {
       @user = create(:user)
       session[:user_id] = @user.id
@@ -82,6 +82,11 @@ describe QuestionsController do
       end
     end
 
-  end
+    it "deletes the contact" do
+      expect{
+        delete :destroy, id: @question
+        }.to change(Question,:count).by(-1)
+      end
+    end
 
 end
