@@ -36,18 +36,26 @@ describe 'Logging in Process' do
 end
 
 describe "Sign Up Process" do
+  let(:user_attr){attributes_for(:user)}
+  describe "Valid user" do 
+    it "links to the right signup page" do 
+      visit root_path
+      click_link 'Sign Up'
+      expect(page).to have_content("Please Register below")
+      expect(page).to have_field("Name")
+      expect(page).to have_field("Username")
+      expect(page).to have_field("Password")
+    end
 
-  it "links to the right signup page" do 
-    visit root_path
-    click_link 'Sign Up'
-    expect(page).to have_content("Please Register below")
-    expect(page).to have_field("Name")
-    expect(page).to have_field("Username")
-    expect(page).to have_field("Password")
-  end
-
-  it "see if guest can register" do 
-    visit root_path
+    it "see if guest can register" do 
+      visit root_path
+      click_link 'Sign Up'
+      fill_in "Name", :with => user_attr[:name]
+      fill_in "Username", :with => user_attr[:username]
+      fill_in "Password", :with => user_attr[:password]
+      click_button("Register")
+      expect(page).to have_content user_attr[:name]
+    end
   end
 end
 
