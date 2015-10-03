@@ -13,4 +13,8 @@ class SessionsController < ApplicationController
       redirect_to root_new_users
     end
 	end
+
+  def show
+    @user = User.find(params[:id])
+  end
 end
