@@ -40,7 +40,7 @@ describe SessionsController do
       end
 
       it "expects an error flash" do
-      	expect(flash[:error]).to have_content "User not found, please login"
+      	expect(flash[:error]).to have_content "User not found, please try logging in again"
       end
 
 		end

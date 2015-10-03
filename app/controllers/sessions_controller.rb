@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash[:message] = "You succesfully logged in"
       redirect_to root_path
     else
-      flash[:error] = "User not found, please login"
+      flash[:error] = "User not found, please try logging in again"
       redirect_to login_path
     end
 	end
