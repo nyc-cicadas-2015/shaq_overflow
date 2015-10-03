@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 		user = User.find_by(username: session_params[:username])
     if user.try(:authenticate, session_params[:password])
       session[:user_id] = user.id
+      flash[:message] = "You succesfully logged in"
       redirect_to root_path
     else
       flash[:error] = "Unable to find password & username combination"
