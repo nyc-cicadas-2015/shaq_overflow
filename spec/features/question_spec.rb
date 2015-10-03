@@ -64,7 +64,9 @@ describe ' a new question page' do
 end
 
 describe 'question show page' do
-  let!(:question) { create(:question) }
+  let(:question) { create(:question) }
+  let(:answer) { create(:answer) }
+
   it 'shows question' do
     visit question_path(question)
     expect(page).to have_content question.title
@@ -78,20 +80,27 @@ describe 'question show page' do
 
   it 'should show link to add answer' do
     visit question_path(question)
-    expect(page).to have_content("Post your answer")
+    expect(page).to have_content("Post answer")
   end
 
-  xit 'should show tags related to question' do
+  it 'should show answers related to question' do
+    visit question_path(question)
+    question.answers.each do |answer|
+      expect(page).to have_content answer.body
+    end
   end
 
-  xit 'should show votes for question' do
-  end
+  # xit 'should show tags related to question' do
+  # end
 
-  xit 'should show votes for answer' do
-  end
+  # xit 'should show votes for question' do
+  # end
 
-  xit 'should show votes for response' do
-  end
+  # xit 'should show votes for answer' do
+  # end
+
+  # xit 'should show votes for response' do
+  # end
 end
 
 
