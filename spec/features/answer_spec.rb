@@ -23,4 +23,14 @@ describe "answer box" do
     expect(page).to have_content answer_attr[:body]
   end
 
+  it "does not submit empty answer" do
+    log_me_in
+    visit question_path(question)
+    within("#new_answer") do
+      fill_in 'answer_body', :with => nil
+    end
+    click_button 'Post answer'
+    expect(page).to have_content("Answer field cannot be empty")
+  end
+
 end

@@ -10,6 +10,7 @@
 <%= link_to "add a response", "/responses/new" %>
 
 <h2>Answer:</h2>
+
 <%= form_for @answer do |f| %>
   <%= f.hidden_field :question_id, value: params[:id] %>
   <%= f.label :answer %>
