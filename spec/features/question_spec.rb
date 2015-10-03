@@ -14,8 +14,6 @@ describe "question index page" do
 describe ' a new question page' do
 
  let(:question_attr){attributes_for(:question)}
- let(:user){attributes_for(:user)}
-
 
  let(:log_me_in) {
    user = create(:user)
@@ -26,6 +24,10 @@ describe ' a new question page' do
     click_button 'Login'
   end
 }
+
+ let(:create_question) {
+  question = create(:question)
+ }
 
 
   it "links to correct question's pages" do
@@ -88,4 +90,22 @@ describe ' a new question page' do
   end
 
 end
+
+  it 'to change its information' do
+      create_question
+      log_me_in
+      click_link question_path(question)
+      click_on "Edit question"
+      fill_in "Title", :with => "Test"
+      fill_in "Body", with => "Is working"
+      click_button "Update"
+      expect(page).to have_content "Test"
+  end
+
+
+
+end
+
+
+
 
