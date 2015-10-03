@@ -20,7 +20,8 @@ class QuestionsController < ApplicationController
       user.questions.create(question_params)
       redirect_to root_path
     else
-      puts "nah"
+      flash[:login] = "You must login in order to create a post"
+      redirect_to login_path
     end
   end
 
