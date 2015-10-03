@@ -37,7 +37,7 @@ end
 
 describe "Sign Up Process" do
 
-  it "links to the right page" do 
+  it "links to the right signup page" do 
     visit root_path
     click_link 'Sign Up'
     expect(page).to have_content("Please Register below")
@@ -45,4 +45,10 @@ describe "Sign Up Process" do
     expect(page).to have_field("Username")
     expect(page).to have_field("Password")
   end
+
+  it "see if guest can register" do 
+    visit root_path
+  end
 end
+
+
