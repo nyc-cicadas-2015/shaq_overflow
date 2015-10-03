@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe SessionsController do
 	describe "POST #create" do
-
 		describe "When succesful" do
 			before(:each) {
         @user = create(:user) #Why is this @user and not user?  It stops working if I do it otherwise
@@ -31,6 +30,7 @@ describe SessionsController do
       before(:each){
         post :create, session: { username: 'nil', password: 'nil' }
       }
+
       it "redirect to login page" do 
         expect(response).to redirect_to(login_path)
       end
@@ -42,7 +42,6 @@ describe SessionsController do
       it "expects an error flash" do
       	expect(flash[:error]).to have_content "User not found, please try logging in again"
       end
-
 		end
 	end
 end
