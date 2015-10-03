@@ -47,7 +47,7 @@ describe "Sign Up Process" do
       expect(page).to have_field("Password")
     end
 
-    it "see if guest can register" do 
+    it "Register will redirect properly" do 
       visit root_path
       click_link 'Sign Up'
       fill_in "Name", :with => user_attr[:name]
@@ -55,6 +55,18 @@ describe "Sign Up Process" do
       fill_in "Password", :with => user_attr[:password]
       click_button("Register")
       expect(page).to have_content user_attr[:name]
+    end
+  end
+
+  describe "Invalid user" do
+    it "see if guest can register" do 
+      visit root_path
+      click_link 'Sign Up'
+      fill_in "Name", :with => nil
+      fill_in "Username", :with => nil
+      fill_in "Password", :with => nil
+      click_button("Register")
+      expect(page).to have_content("Invalid registration field")
     end
   end
 end
