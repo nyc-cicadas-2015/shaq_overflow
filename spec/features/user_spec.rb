@@ -39,5 +39,6 @@ describe "Sign Up Process" do
   it "A guest can sign up" do 
     visit root_path
     click_link 'Sign Up'
+    expect(page).to have_content("Please Register below")
   end
 end
