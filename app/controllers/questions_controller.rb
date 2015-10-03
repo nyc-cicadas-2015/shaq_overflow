@@ -6,10 +6,12 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @answer = @question.answers.new
   end
 
   def show
     @question = Question.find_by(id: params[:id])
+    @answer = @question.answers.new
   end
 
   def create
