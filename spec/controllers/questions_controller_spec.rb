@@ -68,8 +68,8 @@ describe QuestionsController do
         put :update, id: @question,
         question: attributes_for(:question, title: "Updated title", body: "Updated body", user_id: @user.id)
         @question.reload
-        @question.title.should eq("Updated title")
-        @question.body.should eq("Updated body")
+        expect(@question.title).to eq("Updated title")
+        expect(@question.body).to eq("Updated body")
       end
     end
 
