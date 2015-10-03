@@ -1,5 +1,6 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
+<%= render file: '/responses/new', locals:{response: } %>
 
 <% @question.answers.each do |answer| %>
   <%= answer.body %>
