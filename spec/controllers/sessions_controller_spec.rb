@@ -23,11 +23,11 @@ describe SessionsController do
       end
 
       it "expects a message flash" do
-      	expect(flash[:message]).to have_content "You succesfully logged in"
+        expect(flash[:message]).to have_content "You succesfully logged in"
       end
-		end
+    end
 
-		describe "When unsuccesful" do
+    describe "When unsuccesful" do
       before(:each){
         post :create, session: { username: 'nil', password: 'nil' }
       }
@@ -39,7 +39,9 @@ describe SessionsController do
         expect(session[:user_id]).to be_nil
       end
 
-      it "expects an error flash"
+      it "expects an error flash" do
+      	expect(flash[:error]).to have_content "User not found, please login"
+      end
 
 		end
 	end
