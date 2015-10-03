@@ -22,6 +22,10 @@ describe SessionsController do
       	expect(session[:user_id]).to eq(@user.id)
       end
 
+      it "expect a confirmation flash message" do
+      	expect(flash[:message]).to have_content "You succesfully logged in"
+      end
+
 		end
 
 		describe "When unsuccesful" do
