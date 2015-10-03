@@ -1,1 +1,3 @@
-answers_controller.rb
+class AnswersController < ApplicationController
+  def
+end
