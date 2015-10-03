@@ -9,7 +9,7 @@
 <h1>Questions</h1>
 
 <% @questions.each do |question| %>
-  <%= question.title %>
+  <%= link_to question.title, question_path(question) %>
 <% end %>
 
 <%= link_to "Ask question", new_question_path %>

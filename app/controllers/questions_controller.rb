@@ -8,6 +8,10 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  def show
+    @question = Question.find_by(id: params[:id])
+  end
+
   def create
     user = current_user
     if user

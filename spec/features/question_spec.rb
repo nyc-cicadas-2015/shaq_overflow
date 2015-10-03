@@ -4,13 +4,12 @@ describe "question index page" do
   let!(:question) { create(:question) }
   let!(:questions) { [question, create(:question)] }
 
-  it "show all questions on questions page" do
+  it "shows all questions on page" do
     visit root_path
     questions.each do |question|
       expect(page).to have_content question.title
     end
   end
-end
 
 describe ' a new question page' do
 
@@ -29,19 +28,64 @@ describe ' a new question page' do
 }
 
 
-it 'see if question form exists on page' do
-  visit root_path
-  click_link("Ask question")
-  expect(page).to have_content ("Create new question")
+  it "links to correct question's pages" do
+    visit root_path
+    click_on question.title
+    expect(current_path).to eq question_path(question)
+    expect(page).to have_content question.title
+    expect(page).to have_content question.body
+    expect(page).to_not have_content questions.last.title
+  end
+
+  it 'see if we can create a question' do
+    log_me_in
+    visit root_path
+    click_link("Ask question")
+    fill_in 'Body', :with => question_attr[:body]
+    fill_in 'Title', :with => question_attr[:title]
+    click_button('Submit')
+    expect(page).to have_content question_attr[:title]
+  end
 end
 
-it 'see if we can create a question' do
-  log_me_in
-  visit root_path
-  click_link("Ask question")
-  fill_in 'Body', :with => question_attr[:body]
-  fill_in 'Title', :with => question_attr[:title]
-  click_button('Submit')
-  expect(page).to have_content question_attr[:title]
+describe 'question show page' do
+  let!(:question) { create(:question) }
+  it 'shows question' do
+    visit question_path(question)
+    expect(page).to have_content question.title
+    expect(page).to have_content question.body
+  end
+
+  it 'should show link to add response to question' do
+    visit question_path(question)
+    expect(page).to have_link("add a response")
+  end
+
+  it 'should show link to add answer' do
+    visit question_path(question)
+    expect(page).to have_content("Post your answer")
+  end
+
+  xit 'should show tags related to question' do
+  end
+
+  xit 'should show votes for question' do
+  end
+
+  xit 'should show votes for answer' do
+  end
+
+  xit 'should show votes for response' do
+  end
 end
+
+
+describe ' a new question page' do
+  it 'see if question form exists on page' do
+    visit root_path
+    click_link("Ask question")
+    expect(page).to have_content ("Create new question")
+  end
+
 end
+
