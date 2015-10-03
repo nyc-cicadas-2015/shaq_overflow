@@ -37,13 +37,18 @@ class QuestionsController < ApplicationController
   def update
     question = Question.find(params[:id])
     question.update(question_params)
+    if question.check_for_empty_fields?
+     flash[:input] = "Please input information"
+     redirect_to edit_question_path(question)
+   else
     redirect_to root_path
   end
+end
 
-  private
+private
 
-  def question_params
-    params.require(:question).permit(:body,:title)
-  end
+def question_params
+  params.require(:question).permit(:body,:title)
+end
 
 end

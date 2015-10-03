@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe QuestionsController do
 
-let(:login_page){LoginPageHelper.new}
+  let(:login_page){LoginPageHelper.new}
 
   describe "GET index" do
     it "assigns @questions" do
@@ -35,44 +35,53 @@ let(:login_page){LoginPageHelper.new}
   describe "POST create" do
 
     before(:each) {
-        @user = create(:user)
-        session[:user_id] = @user.id
-      }
+      @user = create(:user)
+      session[:user_id] = @user.id
+    }
 
-   context "with valid attributes" do
-    it "saves the new contact in the database" do
+    context "with valid attributes" do
+      it "saves the new contact in the database" do
         expect{
-        post :create, question:attributes_for(:question)
-        }.to change(Question,:count).by(1)
+          post :create, question:attributes_for(:question)
+          }.to change(Question,:count).by(1)
+        end
+      end
+
+      context "with invalid attributes" do
+        it "redirects to same page with flash message" do
+          post :create, question: {title:"", body:""}
+          expect(flash[:input]).to have_content("Please input information")
+        end
       end
     end
 
-    context "with invalid attributes" do
-      it "redirects to same page with flash message" do
-        post :create, question: {title:"", body:""}
+    describe "PUT update" do
+     before(:each) {
+      @user = create(:user)
+      session[:user_id] = @user.id
+      @question = create(:question)
+    }
+
+    context "valid attributes" do
+
+      it "changes @question's attributes" do
+        put :update, id: @question,
+        question: attributes_for(:question, title: "Updated title", body: "Updated body", user_id: @user.id)
+        @question.reload
+        @question.title.should eq("Updated title")
+        @question.body.should eq("Updated body")
+      end
+    end
+
+    context "invalid attributes" do
+      it "shows a flash message telling you to input info" do
+        put :update, id: @question,
+        question: attributes_for(:question, title: "", body: "", user_id: @user.id)
+        @question.reload
         expect(flash[:input]).to have_content("Please input information")
       end
-  end
-end
-
-describe "PUT update" do
- before(:each) {
-        @user = create(:user)
-        session[:user_id] = @user.id
-        @question = create(:question)
-      }
-
-context "valid attributes" do
-
-it "changes @question's attributes" do
-      put :update, id: @question,
-        question: attributes_for(:question, title: "Updated title", body: "Updated body", user_id: @user.id)
-      @question.reload
-      @question.title.should eq("Updated title")
-      @question.body.should eq("Updated body")
     end
-  end
-end
 
+  end
 
 end
