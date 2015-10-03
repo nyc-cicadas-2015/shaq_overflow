@@ -1,4 +1,4 @@
-describe 'Creating a user' do
+describe 'Logging in Process' do
 	let(:log_me_in) {
   	user = create(:user)
 	  visit login_path
@@ -15,9 +15,7 @@ describe 'Creating a user' do
       expect(page).to have_content('Sign Up')
       expect(page).to have_content('Login')
     end
-  end
 
-  describe "If user is Logged In" do
     it 'should have a sign up link' do
     	log_me_in
       visit root_url
@@ -25,4 +23,9 @@ describe 'Creating a user' do
       expect(page).to have_content('Logout')
     end
   end
+  describe "if user is logged in" do
+    it ""
+  end
+
+
 end
