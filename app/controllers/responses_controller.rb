@@ -4,4 +4,6 @@ class ResponsesController < ApplicationController
     @response = Response.new
   end
 
+
+
 end
