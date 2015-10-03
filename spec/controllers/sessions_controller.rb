@@ -1,1 +1,5 @@
-sessions_controller.rb
+require 'rails_helper'
+
+describe SessionsController do
+
+end
