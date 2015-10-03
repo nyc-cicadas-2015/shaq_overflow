@@ -1,3 +1,11 @@
 .spacer {
 	height: 10px;
 }
+
+.container {
+  margin: 20px auto;
+  width: 90%;
+  padding: 0px 20px 20px 20px;
+  border: 2px solid #1A103F;
+  background-color: #F5F6EE;
+}

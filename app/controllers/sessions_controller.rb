@@ -9,8 +9,13 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path
     else
-      flash[:invalid_login] = "Unable to find password & username combination"
+      flash[:error] = "Unable to find password & username combination"
       redirect_to root_new_users
     end
 	end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path
+  end
 end
