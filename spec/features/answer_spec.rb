@@ -27,7 +27,7 @@ describe "answer box" do
     log_me_in
     visit question_path(question)
     within("#new_answer") do
-      fill_in 'answer_body', :with => nil
+      fill_in 'answer_body', :with => ""
     end
     click_button 'Post answer'
     expect(page).to have_content("Answer field cannot be empty")
