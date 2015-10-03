@@ -29,8 +29,8 @@ describe 'Logging in Process' do
     it "should log me out" do
       log_me_in
       click_link 'Logout'
-      # expect(page).to have_content('Sign Up')
-      # expect(page).to have_content('Login')
+      expect(page).to have_content('Sign Up')
+      expect(page).to have_content('Login')
     end
   end
 
