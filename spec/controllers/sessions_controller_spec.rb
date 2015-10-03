@@ -58,6 +58,8 @@ describe SessionsController do
     end
 
     it "expects an error flash" do
+      session[:user_id] = 1
+      delete :destroy
       expect(flash[:message]).to have_content "You have been succesfully logged out"
     end
   end
