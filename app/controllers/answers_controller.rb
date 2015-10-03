@@ -5,6 +5,10 @@ class AnswersController < ApplicationController
     @answer = Answer.new
   end
 
+  def edit
+    @answer = Answer.find_by(id: params[:id])
+  end
+
   def create
     if logged_in?
       user = current_user

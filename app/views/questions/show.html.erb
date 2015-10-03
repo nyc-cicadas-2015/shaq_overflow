@@ -3,8 +3,8 @@
 
 <% @question.answers.each do |answer| %>
   <%= answer.body %>
-  <% if logged_in? && @answer.user_id == current_user.id %>
-    <%= link_to "Edit answer", "/answers/_form" %>
+  <% if logged_in? && answer.user_id == current_user.id %>
+    <%= link_to "Edit answer", edit_answer_path(answer) %>
   <% end %>
 <% end %>
 
