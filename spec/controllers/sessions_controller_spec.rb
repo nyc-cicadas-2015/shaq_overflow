@@ -18,6 +18,10 @@ describe SessionsController do
       	expect(session).to have_key(:user_id)
       end
 
+      it "sets session to the user_id" do
+      	expect(session[:user_id]).to eq(@user.id)
+      end
+
 		end
 
 		describe "When unsuccesful" do
