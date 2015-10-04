@@ -18,7 +18,6 @@ describe AnswersController do
         expect {
           post :create, answer: { body: answer_attr[:body], question_id: @question.id, user_id: @user.id }
         }.to change(Answer,:count).by(1)
-        end
       end
     end
 
@@ -38,6 +37,38 @@ describe AnswersController do
       end
 
     end
+  end
+
+  describe "PATCH #update" do
+    before(:each) {
+        @user = create(:user)
+        session[:user_id] = @user.id
+        @question = create(:question)
+        @answer = create(:answer)
+    }
+
+    describe "when successful" do
+
+      it "changes answer body" do
+        patch :update, id: @answer,  answer: { body: "change to this", question_id: @question.id, user_id: @user.id }
+        @answer.reload
+        @answer.body.should eq("change to this")
+      end
+
+    end
+
+    describe "invalid attributes" do
+
+      it "shows error message" do
+        patch :update, id: @answer, answer: { body: "", question_id: @question.id, user_id: @user.id }
+        @answer.reload
+        expect(flash[:error]).to have_content("Answer field cannot be empty")
+      end
+
+    end
 
   end
+
+  describe ""
+end
 
