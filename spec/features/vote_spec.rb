@@ -24,10 +24,18 @@ describe 'Question Voting process' do
 	  	visit root_path
 	  	expect(page).to have_button "Upvote"
 	  end
+
+	  it "will display flash telling user they upvoted if havent voted" do
+	  	log_me_in
+	  	question = create(:question)
+	  	visit root_path
+	  	click_button "Upvote"
+	  	expect(page).to have_content("Thanks for liking the question")
+	  end
 	end
 
-	# describe 'where user has NOT previously voted' do
-	# end
+	describe 'where user has NOT previously voted' do
+	end
 	# describe 'that HAS previously voted' do
 	# end
 end
