@@ -25,7 +25,7 @@ class VotesController < ApplicationController
 					answer.votes.find_by(user_id: session[:user_id]).destroy
 					flash[:message] = "You've unliked the answer"
 				end
-				redirect_to root_path #need to change this to question path
+				redirect_to question_path(answer.question) #need to change this to question path
 
 			elsif vote_params[:response_id] != nil	
 				response = Response.find_by(id: vote_params[:response_id])
