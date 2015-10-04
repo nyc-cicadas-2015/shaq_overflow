@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 describe 'Question Voting process' do
-	it "to not see upvote button if not logged in" do
-		visit root_path
-  	expect(page).to have_no_button "Upvote"
-	end
-
-	before(:each){
-		log_me_in
-	}
-
 	let(:log_me_in) {
     user = create(:user)
     visit login_path
@@ -19,11 +10,21 @@ describe 'Question Voting process' do
       click_button 'Login'
     end
   }
-  it "to see upvote button on page" do
-  	question = create(:question)
-  	visit root_path
-  	expect(page).to have_button "Upvote"
-  end
+	describe "where user is NOT logged in" do
+		it "to not see an upvote button" do
+			visit root_path
+	  	expect(page).to have_no_button "Upvote"
+		end
+	end
+
+	describe "where user IS logged in" do
+	  it "to see upvote button on page" do
+	  	log_me_in
+	  	question = create(:question)
+	  	visit root_path
+	  	expect(page).to have_button "Upvote"
+	  end
+	end
 
 	# describe 'where user has NOT previously voted' do
 	# end
