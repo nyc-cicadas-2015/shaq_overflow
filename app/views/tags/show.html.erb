@@ -1,6 +1,7 @@
 <h4>Here are the post with the tag <%=@tag.name%></h4>
 
+<ul>
 <% @tag.questions.each do |question| %>
 	<%= render partial: "questions/show", locals: {question: question} %>
-	<div class="spacer"></div>
 <% end %>
+</ul>
