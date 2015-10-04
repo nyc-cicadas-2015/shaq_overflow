@@ -38,9 +38,7 @@ class AnswersController < ApplicationController
 
   def destroy
     answer = Answer.find_by(id: params[:id])
-    if answer.user == current_user
-      answer.destroy
-    end
+    answer.destroy
     redirect_to question_path(answer.question)
   end
 

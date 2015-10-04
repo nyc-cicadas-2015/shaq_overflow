@@ -39,7 +39,7 @@ describe AnswersController do
     end
   end
 
-  describe "PATCH #update" do
+  describe "PATCH #update and DELETE #destroy" do
     before(:each) {
         @user = create(:user)
         session[:user_id] = @user.id
@@ -48,27 +48,34 @@ describe AnswersController do
     }
 
     describe "when successful" do
-
       it "changes answer body" do
         patch :update, id: @answer,  answer: { body: "change to this", question_id: @question.id, user_id: @user.id }
         @answer.reload
         @answer.body.should eq("change to this")
       end
-
     end
 
     describe "invalid attributes" do
-
       it "shows error message" do
         patch :update, id: @answer, answer: { body: "", question_id: @question.id, user_id: @user.id }
         @answer.reload
         expect(flash[:error]).to have_content("Answer field cannot be empty")
       end
+    end
 
+    describe "delete #destroy" do
+      it "deletes answer" do
+        expect {
+        delete :destroy, id: @answer
+      }.to change(Answer,:count).by(-1)
+      end
+
+      it "redirects to question show page" do
+        delete :destroy, id: @answer
+        response.should redirect_to question_path(@answer.question)
+      end
     end
 
   end
-
-  describe ""
 end
 
