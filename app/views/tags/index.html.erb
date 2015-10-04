@@ -1,6 +1,8 @@
 <h4>Here are all the tags that we have on our site</h4>
 <h6>Clicking a tag will bring you to page with all the posts under that tag</h6>
 
-<% @tags.each do |tag| %>
-	<%= link_to tag.name, tag_path(tag), :class => "user-show-link"%>
-<% end %>
+<ol>
+	<% @tags.each do |tag| %>
+		<%= link_to tag.name, tag_path(tag), :class => "user-show-link"%>
+	<% end %>
+</ol>
