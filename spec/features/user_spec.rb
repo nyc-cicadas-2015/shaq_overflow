@@ -22,7 +22,7 @@ describe 'Logging in Process' do
   describe "if user is logged in" do
     it 'should have a sign up link' do
       log_me_in
-      expect(page).to have_content('Create Post')
+      expect(page).to have_content('Ask Question')
       expect(page).to have_content('Logout')
     end
 
