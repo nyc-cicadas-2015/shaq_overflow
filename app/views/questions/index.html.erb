@@ -1,9 +1,9 @@
 <h1>Questions</h1>
 
 <ol>
-<% @questions.each do |question| %>
-	<%= render partial: "questions/show", locals: {question: question} %>
-<% end %>
+	<% @questions.each do |question| %>
+		<%= render partial: "questions/show", locals: {question: question} %>
+	<% end %>
 </ol>
 
 <%= link_to "Ask question", new_question_path %>
