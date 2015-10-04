@@ -1,7 +1,7 @@
 class ResponsesController < ApplicationController
 
   def new
-    question = Question.find_by(id: params[:question_id])
+    # question = Question.find_by(id: params[:question_id])
     @response = Response.new
   end
 
