@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'response form' do
+describe 'response page' do
   before(:each){
     log_me_in
   }
@@ -22,6 +22,15 @@ describe 'response form' do
     click_link "Comment"
     expect(page).to have_content 'Create a new response'
   end
+
+  it "redirects to same page with no input" do
+    question = create(:question)
+    visit question_path(question)
+    click_link "Comment"
+    click_button 'Post response!'
+    expect(page).to have_content "Response field cannot be empty"
+  end
+
 
   it "to see if we can create a response" do
     question = create(:question)
