@@ -32,6 +32,15 @@ class ResponsesController < ApplicationController
   end
 
   def create_answer_response
+     user = current_user
+    answer = Answer.find_by(id: params[:response][:respondable_id])
+    if params[:response][:body] == ""
+      flash[:error] = "Response field cannot be empty"
+      redirect_to new_answer_response_path(answer)
+    else
+      user.responses.create(params_response)
+      redirect_to question_path(answer.question)
+    end
   end
 
 
