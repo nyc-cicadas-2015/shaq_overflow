@@ -47,20 +47,35 @@ describe ResponsesController do
 
   describe "PATCH #update" do
     context "valid attributes" do
-
-      it "changes response attributes" do
+      before(:each) {
         log_me_in
         create_response
+      }
+
+      it "changes response attributes" do
         patch :update, id: @test_response, response: { body: "change to this" }
         @test_response.reload
         @test_response.body.should eq("change to this")
       end
 
-      it "redirects to updated page with changed response" do
-        log_me_in
-        create_response
+      it "redirects when successful" do
         patch :update, id: @test_response, response: { body: "change to this" }
         response.should redirect_to question_path(@question)
+      end
+    end
+
+    context "invalid attributes" do
+      it "shows error message if empty" do
+        log_me_in
+        create_response
+        patch :update, id: @test_response, response: { body: "" }
+        @test_response.reload
+        expect(flash[:error]).to have_content("Response field cannot be empty")
+      end
+
+      it "re-renders edit page" do
+        patch :update, id: @test_response, response: { body: "" }
+        response.should render_template :edit
       end
     end
   end

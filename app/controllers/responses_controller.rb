@@ -50,12 +50,16 @@ class ResponsesController < ApplicationController
 
   def update
     response = Response.find(params[:id])
-    response.update_attributes(params_response)
-    if response.respondable_type == "Question"
-      redirect_to question_path(response.respondable_id)
+    if params_response == ""
+      flash[:error] = "Response field cannot be empty"
     else
-      answer = Answer.find(response.respondable_id)
-      redirect_to question_path(answer.question)
+      response.update_attributes(params_response)
+      if response.respondable_type == "Question"
+        redirect_to question_path(response.respondable_id)
+      else
+        answer = Answer.find(response.respondable_id)
+        redirect_to question_path(answer.question)
+      end
     end
   end
 
