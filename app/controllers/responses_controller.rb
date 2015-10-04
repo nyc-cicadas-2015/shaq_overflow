@@ -22,6 +22,7 @@ class ResponsesController < ApplicationController
   end
 
   def edit
+    @question = Question.find(params[:question_id])
     @response = Response.find(params[:id])
   end
 
