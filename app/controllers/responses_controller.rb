@@ -25,6 +25,16 @@ class ResponsesController < ApplicationController
     @response = Response.find(params[:id])
   end
 
+  def update
+    response = Response.find(params[:id])
+    response.update_attributes(params_response)
+    if response.respondable_type == "Question"
+      redirect_to question_path(response.respondable_id)
+    else
+      answer = Answer.find(response.respondable_id)
+      redirect_to question_path(answer.question)
+    end
+  end
 
 
   private
