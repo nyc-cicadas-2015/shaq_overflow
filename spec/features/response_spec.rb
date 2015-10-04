@@ -1,22 +1,38 @@
 require 'rails_helper'
 
-describe 'response form' do
+describe 'response page' do
   before(:each){
     log_me_in
   }
 
   let(:log_me_in) {
-    user = create(:user)
+    @user = create(:user)
     visit login_path
     within("#login") do
-      fill_in 'Username', :with => user.username
-      fill_in 'Password', :with => user.password
+      fill_in 'Username', :with => @user.username
+      fill_in 'Password', :with => @user.password
       click_button 'Login'
     end
   }
   let(:response_attr){attributes_for(:response)}
 
-  it "to see if it is on the page" do
+  it "to see if form is on correct page" do
+    question = create(:question)
+    visit question_path(question)
+    click_link "Comment"
+    expect(page).to have_content 'Create a new response'
+  end
+
+  it "redirects to same page with no input" do
+    question = create(:question)
+    visit question_path(question)
+    click_link "Comment"
+    click_button 'Post response!'
+    expect(page).to have_content "Response field cannot be empty"
+  end
+
+
+  it "to see if we can create a response" do
     question = create(:question)
     visit question_path(question)
     click_link "Comment"
@@ -26,4 +42,16 @@ describe 'response form' do
     click_button 'Post response!'
     expect(page).to have_content response_attr[:body]
   end
+
+# it "see if we can reach edit form" do
+#   question = create(:question)
+#   visit question_path(question)
+#   Response.create(respondable_id: question.id, respondable_type: "Question",user_id: @user.id, body:"Test edit form" )
+#   click_link "Edit response"
+#   expect(page). to have_content "Edit your response"
+# end
+
+
+
 end
+
