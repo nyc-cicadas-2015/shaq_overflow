@@ -1,0 +1,9 @@
+<h2>Welcome to the Users Index Page</h2>
+<h4>Click on a user to see all their profile page</h4>
+
+<ul>
+	<% @users.each do |user| %>
+		<p><%=link_to "#{user.username}", user_path(user)%> || posted: <%=user.questions.count%> questions || answered: <%=user.answers.count%> questions</p>
+		<div class="spacer"></div>
+	<% end %>
+</ul>
