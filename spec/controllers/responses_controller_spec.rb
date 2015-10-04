@@ -47,6 +47,7 @@ describe ResponsesController do
 
   describe "PATCH #update" do
     context "valid attributes" do
+
       it "changes response attributes" do
         log_me_in
         create_response
