@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "answer box" do
+describe "answers" do
   let!(:question) { create(:question) }
   let(:answer_attr) { attributes_for(:answer) }
   let(:log_me_in) {
