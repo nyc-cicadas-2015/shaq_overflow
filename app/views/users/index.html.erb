@@ -4,9 +4,5 @@
 <ul>
 	<% @users.each do |user| %>
 		<%= render partial: "users/show", locals: {user: user} %>
-
-
-		<p><%=link_to "#{user.username}", user_path(user)%> || posted: <%=user.questions.count%> questions || answered: <%=user.answers.count%> questions</p>
-		<div class="spacer"></div>
 	<% end %>
 </ul>
