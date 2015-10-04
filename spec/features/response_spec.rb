@@ -14,6 +14,7 @@ describe 'response page' do
       click_button 'Login'
     end
   }
+
   let(:response_attr){attributes_for(:response)}
 
   it "to see if new response form is on correct page" do
@@ -72,6 +73,15 @@ describe 'response page' do
     click_link("Delete response!")
     expect(page).to have_content "You have deleted your response"
   end
+
+   it "to see if new response form is on correct page" do
+    answer = create(:answer)
+    visit question_path(answer.question)
+    click_link "Comment Answer"
+    expect(page).to have_content 'Create a new response'
+  end
+
+
 
 
 end

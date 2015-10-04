@@ -9,6 +9,16 @@ class ResponsesController < ApplicationController
     end
   end
 
+  # def new_answer_response
+  #   if logged_in?
+  #     @answer = Answer.find_by(id: params[:answer_id])
+  #     @response = Response.new
+  #   else
+  #     redirect_to login_path
+  #   end
+  # end
+
+
   def create
     user = current_user
     question = Question.find_by(id: params[:response][:respondable_id])
