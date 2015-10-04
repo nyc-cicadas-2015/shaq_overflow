@@ -36,14 +36,17 @@ describe ResponsesController do
   # end
 
   describe "GET #edit" do
-
     it "renders edit page" do
       log_me_in
       create_response
       get :edit, id: @test_response.id
       response.should render_template :edit
     end
+  end
 
+  describe "PATCH #update" do
+    context "valid attributes" do
+    end
   end
 
 end
