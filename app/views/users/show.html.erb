@@ -4,18 +4,21 @@
 <h4>Here are the Questions you've posted</h4>
 <% @user.questions.each do |question| %>
 	<p><%=question.title %> NOTE CHANGE THIS TO A PARTIAL</p>
+	<div class="spacer"></div>
 <% end %>
 
 <div class="spacer"></div>
 <h4>Here are the Answered you've so kindkly spent time on</h4>
 <% @user.answers.each do |answer| %>
-	<p><%=answer.title %> NOTE CHANGE THIS TO A PARTIAL</p>
+	<p><%=answer.body %> NOTE CHANGE THIS TO A PARTIAL</p>
+	<div class="spacer"></div>
 <% end %>
 
 <div class="spacer"></div>
 <h4>Here are the Responses you've submitted</h4>
 <% @user.responses.each do |response| %>
 	<p><%=response.body %> NOTE CHANGE THIS TO A PARTIAL</p>
+	<div class="spacer"></div>
 <% end %>
 
 <%= link_to "Go Back To Home Page", root_path %>
