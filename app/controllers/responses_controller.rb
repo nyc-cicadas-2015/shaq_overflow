@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
 
   def new_answer_response
     if logged_in?
-      @answer = Answer.find_by(id: params[:answer_id])
+      @answer = Answer.find_by(id: params[:id])
       @response = Response.new
     else
       redirect_to login_path
@@ -32,6 +32,15 @@ class ResponsesController < ApplicationController
   end
 
   def create_answer_response
+     user = current_user
+    answer = Answer.find_by(id: params[:response][:respondable_id])
+    if params[:response][:body] == ""
+      flash[:error] = "Response field cannot be empty"
+      redirect_to new_answer_response_path(answer)
+    else
+      user.responses.create(params_response)
+      redirect_to question_path(answer.question)
+    end
   end
 
 
