@@ -1,5 +1,5 @@
 <h6>Create a new response</h6>
-<%= form_for [@answer, @response] do |f| %>
+<%= form_for [@answer,@response], url: {action: "create_answer_response"} do |f| %>
 <%= f.hidden_field :respondable_id, value: params[:id] %>
 <%= f.hidden_field :respondable_type, value: "Answer" %>
   <%= f.label :body %>

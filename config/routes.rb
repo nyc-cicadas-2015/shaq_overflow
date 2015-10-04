@@ -2,16 +2,18 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :users
-  get "/answers/:id/responses/new" => 'responses#new_answer_response', as: 'new_answer_response'
+
+
 
   resources :questions do
     resources :responses
   end
-  resources :responses
+  resources :responses, only: [:edit, :update, :destroy]
   resources :answers
-
-
+  get "/answers/:id/responses/new" => 'responses#new_answer_response', as: 'new_answer_response'
   post "/answers/:id/responses" => 'responses#create_answer_response'
+
+
 # get '/responses/:id/edit' => 'responses#edit', as: 'edit_response'
 # delete '/responses/:id' => 'responses#destroy'
 

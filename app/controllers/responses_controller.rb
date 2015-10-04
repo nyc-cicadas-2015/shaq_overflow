@@ -12,7 +12,7 @@ class ResponsesController < ApplicationController
   def new_answer_response
     if logged_in?
       @answer = Answer.find_by(id: params[:id])
-      @response = Response.new
+      @response = @answer.responses.new
     else
       redirect_to login_path
     end
@@ -27,12 +27,12 @@ class ResponsesController < ApplicationController
       redirect_to new_question_response_path(question.id)
     else
       user.responses.create(params_response)
-      redirect_to question_path(question)
+      redirect_to question_path(question.id)
     end
   end
 
   def create_answer_response
-     user = current_user
+    user = current_user
     answer = Answer.find_by(id: params[:response][:respondable_id])
     if params[:response][:body] == ""
       flash[:error] = "Response field cannot be empty"
@@ -50,12 +50,16 @@ class ResponsesController < ApplicationController
 
   def update
     response = Response.find(params[:id])
-    response.update_attributes(params_response)
-    if response.respondable_type == "Question"
-      redirect_to question_path(response.respondable_id)
+    if params_response == ""
+      flash[:error] = "Response field cannot be empty"
     else
-      answer = Answer.find(response.respondable_id)
-      redirect_to question_path(answer.question)
+      response.update_attributes(params_response)
+      if response.respondable_type == "Question"
+        redirect_to question_path(response.respondable_id)
+      else
+        answer = Answer.find(response.respondable_id)
+        redirect_to question_path(answer.question)
+      end
     end
   end
 
