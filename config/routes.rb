@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :responses
   end
   resources :responses
+  resources :answers
 
   get "/answers/:answer_id/responses/new" => 'responses#new_answer_response', as: 'new_answer_response'
 
