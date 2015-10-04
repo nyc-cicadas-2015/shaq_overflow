@@ -46,7 +46,14 @@ describe ResponsesController do
 
   describe "PATCH #update" do
     context "valid attributes" do
+      it "located the requested response" do
+        log_me_in
+        create_response
+        patch :update, id: @test_response.id, response: @test_response
+        assigns(:@test_response).should eq(@test_response)
+      end
     end
   end
 
 end
+# { body: "update me", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
