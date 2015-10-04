@@ -4,23 +4,24 @@ class VotesController < ApplicationController
 	end
 
 	def create
-		if vote_params[:question_id] != nil			
-			question = Question.find_by(id: vote_params[:question_id])
-			if question.votes.where({user_id: session[:user_id]}) == []
-				upvote = question.votes.build(user_id: session[:user_id])
-				if upvote.save
-					flash[:message] = "Thanks for liking the question"
+		if logged_in?
+			if vote_params[:question_id] != nil			
+				question = Question.find_by(id: vote_params[:question_id])
+				if question.votes.where({user_id: session[:user_id]}) == []
+					upvote = question.votes.build(user_id: session[:user_id])
+					flash[:message] = "Thanks for liking the question" if upvote.save
+				else
+					question.votes.find_by(user_id: session[:user_id]).destroy
+					flash[:message] = "You've unliked the post"
 				end
-			else
-				question = question.votes.find_by(user_id: session[:user_id])
-				question.destroy
-				flash[:message] = "You've unliked the post"
+			redirect_to root_path
+			elsif vote_params[:comment_id] != nil	
+				# logic goes here
+			elsif vote_params[:response_id] != nil	
+				# logic goes here
 			end
-		redirect_to root_path
-		elsif vote_params[:comment_id] != nil	
-			# logic goes here
-		elsif vote_params[:response_id] != nil	
-			# logic goes here
+		else
+			redirect_to login_path
 		end
 	end
 
