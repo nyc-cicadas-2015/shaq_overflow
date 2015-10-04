@@ -71,4 +71,23 @@ describe "Sign Up Process" do
   end
 end
 
+describe "View User Index" do
+  it "see if guest can see a user in database" do
+    user1 = create(:user)
+    user2 = create(:user)
+    visit root_path
+    click_link 'Users'
+    puts user1.inspect
+    expect(page).to have_content user1.username
+    expect(page).to have_content user2.username
+  end
+  it "allows users to see other user's index page through links" do
+    user1 = create(:user)
+    user2 = create(:user)
+    visit root_path
+    click_link 'Users'
+    click_link user_path(user1)
+    # expect(page).to have_content user1.username
+  end
+end
 
