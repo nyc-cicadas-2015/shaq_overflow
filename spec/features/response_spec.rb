@@ -16,7 +16,14 @@ describe 'response form' do
   }
   let(:response_attr){attributes_for(:response)}
 
-  it "to see if it is on the page" do
+  it "to see if form is on correct page" do
+    question = create(:question)
+    visit question_path(question)
+    click_link "Comment"
+    expect(page).to have_content 'Create a new response'
+  end
+
+  it "to see if we can create a response" do
     question = create(:question)
     visit question_path(question)
     click_link "Comment"
