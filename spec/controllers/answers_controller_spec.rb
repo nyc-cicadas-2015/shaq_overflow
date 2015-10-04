@@ -4,7 +4,7 @@ describe AnswersController do
 
   describe "POST #create" do
 
-    describe "When successful" do
+    describe "with valid attributes" do
       before(:each) {
         @user = create(:user)
         session[:user_id] = @user.id
@@ -21,7 +21,7 @@ describe AnswersController do
       end
     end
 
-    describe "When unsuccessful" do
+    describe "with invalid attributes" do
 
       it "should redirect if not logged in" do
         post :create
@@ -39,7 +39,7 @@ describe AnswersController do
     end
   end
 
-  describe "PATCH #update and DELETE #destroy" do
+  describe "PATCH #update" do
     before(:each) {
         @user = create(:user)
         session[:user_id] = @user.id
@@ -47,7 +47,7 @@ describe AnswersController do
         @answer = create(:answer)
     }
 
-    describe "when successful" do
+    describe "valid attributes" do
       it "changes answer body" do
         patch :update, id: @answer,  answer: { body: "change to this", question_id: @question.id, user_id: @user.id }
         @answer.reload
