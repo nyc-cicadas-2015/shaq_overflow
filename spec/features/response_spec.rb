@@ -51,7 +51,5 @@ describe 'response page' do
 #   expect(page). to have_content "Edit your response"
 # end
 
-
-
 end
 
