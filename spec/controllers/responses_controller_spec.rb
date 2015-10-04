@@ -8,7 +8,7 @@ describe ResponsesController do
   let(:response_attr) { attributes_for(:response) }
   let(:create_response) {
     @question = create(:question)
-    @test_response = Response.create(body: response_attr[:body], respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id)
+    @test_response = @question.responses.create(body: response_attr[:body],user_id: @user.id)
   }
 
 
@@ -49,7 +49,7 @@ describe ResponsesController do
       it "located the requested response" do
         log_me_in
         create_response
-        patch :update, id: @test_response.id, response: @test_response
+        patch :update, id: @test_response, response: @test_response
         assigns(:@test_response).should eq(@test_response)
       end
     end
