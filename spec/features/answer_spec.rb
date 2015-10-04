@@ -46,7 +46,6 @@ end
 
 describe "edit answer" do
   let!(:question) { create(:question) }
-  let(:answer_attr) { attributes_for(:answer) }
   let(:log_me_in) {
     user = create(:user)
     visit login_path
@@ -57,19 +56,26 @@ describe "edit answer" do
     end
   }
 
-  it "shows edit box" do
+  before :each do
     log_me_in
     visit question_path(question)
+    within("#new_answer") do
+      fill_in 'answer_body', :with => "edit me"
+    end
+    click_button 'Post answer'
+  end
+
+  it "shows edit box" do
+    visit question_path(question)
     click_link "Edit answer"
-    expect(page).to have_field("Edit answer")
+    expect(page).to have_content("Edit your answer")
   end
 
   it "updates answer" do
-    log_me_in
     visit question_path(question)
     click_link "Edit answer"
     fill_in "answer_body", :with => "Updated answer"
-    click_button "Update Answer"
+    click_button "Update answer"
     expect(page).to have_content("Updated answer")
   end
 

@@ -1,6 +1,5 @@
 <%= form_for answer do |f| %>
-  <%= f.hidden_field :question_id, value: params[:id] %>
   <%= f.label :answer %>
   <%= f.text_field :body %>
-  <%= f.submit "Post answer" %>
+  <%= f.submit "Update answer" %>
 <% end %>

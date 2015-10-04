@@ -5,10 +5,6 @@ class AnswersController < ApplicationController
     @answer = Answer.new
   end
 
-  def edit
-    @answer = Answer.find_by(id: params[:id])
-  end
-
   def create
     if logged_in?
       user = current_user
@@ -23,6 +19,19 @@ class AnswersController < ApplicationController
       redirect_to login_path
     end
   end
+
+  def edit
+    @answer = Answer.find_by(id: params[:id])
+  end
+
+  def update
+
+    answer = Answer.find_by(id: params[:id])
+    question = answer.question
+    answer.update(params_answer)
+    redirect_to question_path(question)
+  end
+
 
   private
 
