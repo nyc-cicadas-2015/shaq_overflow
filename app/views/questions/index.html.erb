@@ -1,7 +1,15 @@
 <h1>Questions</h1>
 
 <% @questions.each do |question| %>
+  <!-- We should move this to a partial -->
   <%= link_to question.title, question_path(question) %>
+  <% if logged_in? %>
+  	<%= form_for [@votable, Vote.new] do |f| %>
+			<%= f.submit "Upvote" %>
+  	<% end %>
+		<div class="spacer"></div>
+  <% end %>
+
 <% end %>
 
 <%= link_to "Ask question", new_question_path %>
