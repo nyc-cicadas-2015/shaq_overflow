@@ -1,1 +1,5 @@
-_show.html.erb
+<div class="user-show">
+	<p ><%=link_to "#{user.username}", user_path(user), :class => "user-show-link"%> </p>
+	<p class="user-show-description">posted: <%=user.questions.count%> questions  &  answered: <%=user.answers.count%> question</p>
+	<div class="spacer"></div>
+</div>
