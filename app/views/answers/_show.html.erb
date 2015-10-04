@@ -1,7 +1,7 @@
-<li>	
+<li>
 	<%= answer.body %>
 	<p>current vote count: <%= answer.votes.count%></p>
-	<% if logged_in? %> 
+	<% if logged_in? %>
 		<% if answer.user_id == current_user.id %>
 		  <%= link_to "Edit answer", edit_answer_path(answer) %>
 		  <%= link_to "Delete answer", answer, method: :delete %>
