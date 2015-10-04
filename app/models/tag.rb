@@ -4,15 +4,13 @@ class Tag < ActiveRecord::Base
 
   def self.make_tags(tags, question)
     tag_array = tags.split(" ")
-    tag_array.each do |tag|
-      question.tags.create(name: tag)
-    end
+    tag_array.each do |new_tag|
+    	existing_tag = Tag.find_by(name: new_tag)
+    	if existing_tag
+    		question.tags.push(existing_tag)
+    	else
+      	question.tags.create(name: new_tag)
+      end
+  	end
   end
 end
-
-
-# tags = tag_params[:name]
-# thetags = tags.split(" ")
-# thetags.each do |tt|
-# 	question.tags.create(name: tt)
-# end

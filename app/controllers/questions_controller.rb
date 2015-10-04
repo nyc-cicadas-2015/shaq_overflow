@@ -24,11 +24,8 @@ class QuestionsController < ApplicationController
         redirect_to new_question_path
       else
         question.save
-        binding.pry
         if tag_params != nil
-          binding.pry
           Tag.make_tags(tag_params[:name], question)
-          binding.pry
         end
         redirect_to root_path
       end
