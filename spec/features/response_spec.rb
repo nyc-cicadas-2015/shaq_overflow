@@ -19,6 +19,7 @@ describe 'response form' do
   it "to see if it is on the page" do
     question = create(:question)
     visit question_path(question)
+    click_link "Comment"
     within("#new_response") do
       fill_in 'response_body', :with => response_attr[:body]
     end

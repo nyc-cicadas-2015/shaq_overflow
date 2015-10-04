@@ -1,7 +1,6 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
-<%= render file: '/responses/new', locals: {response: @response} %>
-
+<%= link_to "Comment", new_response_path %>
 <% @question.answers.each do |answer| %>
   <%= answer.body %>
   <% if logged_in? && answer.user_id == current_user.id %>
