@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @tag = Tag.new
     @answer = Answer.new
     @response = Response.new
   end
@@ -57,5 +58,9 @@ private
 def question_params
   params.require(:question).permit(:body,:title)
 end
+
+ def tag_params
+   params.require(:question).require(:tag).permit(:name)
+ end
 
 end

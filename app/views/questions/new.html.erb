@@ -1,9 +1,18 @@
 
-<h1>Create new question</h1>
+<h4>Create new question</h4>
 <%= form_for @question do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
+  <div class="spacer"></div>
+
   <%= f.label :body %>
   <%= f.text_field :body %>
-  <%= f.submit "Submit" %>
+  <div class="spacer"></div>
+  
+  <%= f.fields_for @tag do |o| %>
+		<%= o.label :tags %>
+		<%= o.text_field :name, placeholder: "seperated by commas"  %>
+  	<div class="spacer"></div>
+		<%= f.submit "Submit" %>
+	<% end %>
 <% end %>
