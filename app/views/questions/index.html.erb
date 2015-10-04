@@ -2,10 +2,11 @@
 
 <ol>
 <% @questions.each do |question| %>
+
   <li>
   <!-- We should move this to a partial -->
   <%= link_to question.title, question_path(question) %>
-  <%= question.votes.count %>
+  <p> current vote count: <%= question.votes.count %></p>
   <% if logged_in? %>
   	<%= form_for [@votable, Vote.new] do |f| %>
 			<%= f.hidden_field :question_id, value: question.id %>
@@ -14,6 +15,7 @@
 		<div class="spacer"></div>
   <% end %>
   </li>
+
 <% end %>
 </ol>
 
