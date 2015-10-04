@@ -12,7 +12,7 @@
 
 .user-show-link {
 	font-size: 20px;
-	font-weight: bold;
+	text-decoration: none;
 }
 
 .user-show-description {
@@ -36,7 +36,7 @@
 	margin: 0 auto;
 }
 
-/* Logo */
+/* Shaq Overflow Styling */
 
 .header-login-signup .header-limiter h1{
 	float: left;
@@ -49,7 +49,7 @@
 	color: #5383d3;
 }
 
-/* The navigation links */
+/* The nav links */
 
 .header-login-signup .header-limiter a {
 	color: #ffffff;
@@ -111,8 +111,7 @@
 
 /* Making the header responsive */
 
-@media all and (max-width: 600px) {
-
+@media all and (max-width: 785px) {
 	.header-login-signup {
 		padding: 25px;
 		height: 85px;
