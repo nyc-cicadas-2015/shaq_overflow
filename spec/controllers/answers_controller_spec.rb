@@ -8,9 +8,7 @@ describe AnswersController do
   }
 
   describe "POST #create" do
-
     describe "with valid attributes" do
-
       let(:answer_attr) { attributes_for(:answer) }
 
       it "increase answer count by 1" do
@@ -19,11 +17,9 @@ describe AnswersController do
           post :create, answer: { body: answer_attr[:body], question_id: @question.id, user_id: @user.id }
         }.to change(Answer,:count).by(1)
       end
-
     end
 
     describe "with invalid attributes" do
-
       it "should redirect if not logged in" do
         post :create
         expect(response).to redirect_to(login_path)
@@ -34,7 +30,6 @@ describe AnswersController do
         post :create, answer: { body: "", question_id: @question.id }
         expect(flash[:error]).to have_content("Answer field cannot be empty")
       end
-
     end
   end
 
@@ -78,6 +73,5 @@ describe AnswersController do
       response.should redirect_to question_path(@answer.question)
     end
   end
-
 end
 
