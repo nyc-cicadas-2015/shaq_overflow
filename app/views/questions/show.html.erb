@@ -20,7 +20,7 @@
     <% answer.responses.each do |response| %>
     <%= response.body %>
     <% end %>
- <%= link_to "Comment here!", new_answer_response_path %>
+ <%= link_to "Comment here!", "/answers/#{answer.id}/responses/new" %>
 	<% end %>
 </ol>
 <div class="spacer"></div>
