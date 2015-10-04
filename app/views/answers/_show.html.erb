@@ -1,7 +1,15 @@
 <li>	
 	<%= answer.body %>
-	<% if logged_in? && answer.user_id == current_user.id %>
-	  <%= link_to "Edit answer", edit_answer_path(answer) %>
-	  <%= link_to "Delete answer", answer, method: :delete %>
+	<p>current vote count: <%= answer.votes.count%></p>
+	<% if logged_in? %> 
+		<% if answer.user_id == current_user.id %>
+		  <%= link_to "Edit answer", edit_answer_path(answer) %>
+		  <%= link_to "Delete answer", answer, method: :delete %>
+		<% end %>
+
+		<%= form_for [@votable, Vote.new] do |f| %>
+			<%= f.hidden_field :answer_id, value: answer.id %>
+			<%= f.submit "Upvote" %>
+  	<% end %>
 	<% end %>
 </li>
