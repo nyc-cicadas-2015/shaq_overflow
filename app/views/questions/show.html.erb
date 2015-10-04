@@ -1,6 +1,6 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
-<%= link_to "Comment", new_response_path %>
+<%= link_to "Comment", new_question_response_path(@question.id) %>
 <% @question.answers.each do |answer| %>
   <%= answer.body %>
   <% if logged_in? && answer.user_id == current_user.id %>
