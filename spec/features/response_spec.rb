@@ -77,7 +77,7 @@ describe 'response page' do
    it "to see if new response form is on correct page" do
     answer = create(:answer)
     visit question_path(answer.question)
-    click_link "Comment Answer"
+    click_link "Comment here!"
     expect(page).to have_content 'Create a new response'
   end
 

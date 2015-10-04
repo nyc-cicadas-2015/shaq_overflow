@@ -9,14 +9,14 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # def new_answer_response
-  #   if logged_in?
-  #     @answer = Answer.find_by(id: params[:answer_id])
-  #     @response = Response.new
-  #   else
-  #     redirect_to login_path
-  #   end
-  # end
+  def new_answer_response
+    if logged_in?
+      @answer = Answer.find_by(id: params[:answer_id])
+      @response = Response.new
+    else
+      redirect_to login_path
+    end
+  end
 
 
   def create
@@ -30,6 +30,10 @@ class ResponsesController < ApplicationController
       redirect_to question_path(question)
     end
   end
+
+  def create_answer_response
+  end
+
 
   def edit
     @response = Response.find(params[:id])
