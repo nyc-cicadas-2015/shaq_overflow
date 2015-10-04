@@ -1,6 +1,6 @@
 
 <h6>Create a new response</h6>
-<%= form_for :response do |f| %>
+<%= form_for :response , html: {id:"new_response"} do |f| %>
   <%= f.label :body %>
   <%= f.text_field :body %>
   <%= f.submit "Post response!" %>
