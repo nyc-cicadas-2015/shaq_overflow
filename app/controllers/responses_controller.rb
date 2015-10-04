@@ -15,7 +15,7 @@ class ResponsesController < ApplicationController
       else
         user.responses.create(params_response)
       end
-      redirect_to question_path(question.id)
+      redirect_to new_question_response_path(question)
     else
       redirect_to login_path
     end
