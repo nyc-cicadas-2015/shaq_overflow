@@ -21,6 +21,11 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def edit
+    @response = Response.find(params[:id])
+  end
+
+
 
   private
 

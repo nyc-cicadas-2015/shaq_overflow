@@ -42,4 +42,13 @@ describe 'response page' do
     click_button 'Post response!'
     expect(page).to have_content response_attr[:body]
   end
+
+it "see if we can reach edit form" do
+  question = create(:question)
+  visit question_path(question)
+  click_link "Edit response"
+  expect(page). to have_content "Edit your response"
 end
+
+end
+
