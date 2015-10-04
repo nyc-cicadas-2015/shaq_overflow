@@ -75,7 +75,7 @@ describe 'question show page' do
 
   it 'should show link to add response to question' do
     visit question_path(question)
-    expect(page).to have_link("add a response")
+    expect(page).to have_link("Comment")
   end
 
   it 'should show button to add answer' do

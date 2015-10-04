@@ -1,5 +1,10 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
+<%= link_to "Comment", new_question_response_path(@question.id) %>
+
+<% @question.responses.each do |response| %>
+<%= response.body %>
+<% end %>
 
 <% @question.answers.each do |answer| %>
   <%= answer.body %>
@@ -11,7 +16,6 @@
 
 <div class="spacer"></div>
 
-<%= link_to "add a response", "/responses/new" %>
 
 <h2>Answer:</h2>
 

@@ -2,8 +2,13 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :users
-  resources :questions
   resources :answers
+  resources :questions
+
+  resources :questions do
+    resources :responses
+  end
+
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
