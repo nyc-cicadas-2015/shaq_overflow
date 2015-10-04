@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe 'Question Voting process' do
+	it "to not see upvote button if not logged in" do
+		visit root_path
+  	expect(page).to have_no_button "Upvote"
+	end
+
 	before(:each){
 		log_me_in
 	}
