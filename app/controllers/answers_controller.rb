@@ -27,8 +27,13 @@ class AnswersController < ApplicationController
   def update
     answer = Answer.find_by(id: params[:id])
     question = answer.question
-    answer.update(params_answer)
-    redirect_to question_path(question)
+    if params[:answer][:body] == ""
+      flash[:error] = "Answer field cannot be empty"
+      redirect_to edit_answer_path(answer)
+    else
+      answer.update(params_answer)
+      redirect_to question_path(question)
+    end
   end
 
   def destroy

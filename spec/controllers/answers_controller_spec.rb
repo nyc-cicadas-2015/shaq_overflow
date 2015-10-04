@@ -57,6 +57,16 @@ describe AnswersController do
 
     end
 
+    describe "invalid attributes" do
+
+      it "shows error message" do
+        patch :update, id: @answer, answer: { body: "", question_id: @question.id, user_id: @user.id }
+        @answer.reload
+        expect(flash[:error]).to have_content("Answer field cannot be empty")
+      end
+
+    end
+
   end
 
 end
