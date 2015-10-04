@@ -54,6 +54,13 @@ describe ResponsesController do
         @test_response.reload
         @test_response.body.should eq("change to this")
       end
+
+      it "redirects to updated page with changed response" do
+        log_me_in
+        create_response
+        patch :update, id: @test_response, response: { body: "change to this" }
+        response.should redirect_to question_path(@question)
+      end
     end
   end
 
