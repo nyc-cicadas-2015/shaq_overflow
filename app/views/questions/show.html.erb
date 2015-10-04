@@ -10,13 +10,11 @@
 <div class="spacer"></div>
 
 <h4>Answers:</h4>
-<% @question.answers.each do |answer| %>
-  <%= answer.body %>
-  <% if logged_in? && answer.user_id == current_user.id %>
-    <%= link_to "Edit answer", edit_answer_path(answer) %>
-    <%= link_to "Delete answer", answer, method: :delete %>
-  <% end %>
-<% end %>
+<ol>
+	<% @question.answers.each do |answer| %>
+		<%= render partial: "answers/show", locals: {answer: answer} %>
+	<% end %>
+</ol>
 <div class="spacer"></div>
 
 
