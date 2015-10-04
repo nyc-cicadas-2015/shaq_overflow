@@ -16,7 +16,7 @@ describe 'response page' do
   }
   let(:response_attr){attributes_for(:response)}
 
-  it "to see if form is on correct page" do
+  it "to see if new response form is on correct page" do
     question = create(:question)
     visit question_path(question)
     click_link "Comment"
@@ -50,6 +50,11 @@ it "see if we can reach edit form" do
   visit edit_response_path(response)
   expect(page). to have_content "Edit your response"
 end
+
+
+it "see if response changes are made" do
+  question = create(:question)
+  visit question_path(question)
 
 end
 
