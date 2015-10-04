@@ -20,6 +20,25 @@ class AnswersController < ApplicationController
     end
   end
 
+  def edit
+    @answer = Answer.find_by(id: params[:id])
+  end
+
+  def update
+    answer = Answer.find_by(id: params[:id])
+    question = answer.question
+    answer.update(params_answer)
+    redirect_to question_path(question)
+  end
+
+  def destroy
+    answer = Answer.find_by(id: params[:id])
+    if answer.user == current_user
+      answer.destroy
+    end
+    redirect_to question_path(answer.question)
+  end
+
   private
 
   def params_answer
