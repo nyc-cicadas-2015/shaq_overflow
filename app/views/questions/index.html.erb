@@ -1,8 +1,11 @@
 <h1>Questions</h1>
 
+<ol>
 <% @questions.each do |question| %>
+  <li>
   <!-- We should move this to a partial -->
   <%= link_to question.title, question_path(question) %>
+  <%= question.votes.count %>
   <% if logged_in? %>
   	<%= form_for [@votable, Vote.new] do |f| %>
 			<%= f.hidden_field :question_id, value: question.id %>
@@ -10,7 +13,8 @@
   	<% end %>
 		<div class="spacer"></div>
   <% end %>
-
+  </li>
 <% end %>
+</ol>
 
 <%= link_to "Ask question", new_question_path %>
