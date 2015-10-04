@@ -80,3 +80,29 @@ describe "edit answer" do
   end
 
 end
+
+describe "delete answer" do
+  let!(:question) { create(:question) }
+  let(:log_me_in) {
+    user = create(:user)
+    visit login_path
+    within("#login") do
+      fill_in 'Username', :with => user.username
+      fill_in 'Password', :with => user.password
+      click_button 'Login'
+    end
+  }
+
+  it "is no longer on question page" do
+    log_me_in
+    visit question_path(question)
+    within("#new_answer") do
+      fill_in 'answer_body', :with => "delete me"
+    end
+    click_button 'Post answer'
+    visit question_path(question)
+    click_link 'Delete answer'
+    expect(page).to_not have_content("delete me")
+  end
+
+end

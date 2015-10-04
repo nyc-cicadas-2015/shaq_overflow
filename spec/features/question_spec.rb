@@ -31,7 +31,6 @@ describe ' a new question page' do
   question.update_attributes(user_id: @user.id)
  }
 
-
   it "links to correct question's pages" do
     visit root_path
     click_on question.title
