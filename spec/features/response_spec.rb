@@ -43,18 +43,27 @@ describe 'response page' do
     expect(page).to have_content response_attr[:body]
   end
 
-it "see if we can reach edit form" do
-  question = create(:question)
-  visit question_path(question)
-  response = Response.create(respondable_id: question.id, respondable_type: "Question",user_id: @user.id, body:"Test edit form" )
-  visit edit_response_path(response)
-  expect(page). to have_content "Edit your response"
-end
+  it "see if we can reach edit form" do
+    question = create(:question)
+    visit question_path(question)
+    response = Response.create(respondable_id: question.id, respondable_type: "Question",user_id: @user.id, body:"Test edit form" )
+    visit edit_response_path(response)
+    expect(page). to have_content "Edit your response"
+  end
 
 
-it "see if response changes are made" do
-  question = create(:question)
-  visit question_path(question)
+  it "see if response changes are made" do
+    question = create(:question)
+    visit question_path(question)
+    response = question.responses.create(body:"Old information",user_id:@user.id)
+    visit edit_response_path(response)
+    within("#edit_response") do
+      fill_in 'response_body', :with => response_attr[:body]
+    end
+    click_button "Post response!"
+    expect(page).to have_content response_attr[:body]
+  end
+
 
 end
 
