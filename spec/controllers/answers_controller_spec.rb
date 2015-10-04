@@ -8,7 +8,7 @@ describe AnswersController do
   }
 
   describe "POST #create" do
-    describe "with valid attributes" do
+    context "with valid attributes" do
       let(:answer_attr) { attributes_for(:answer) }
 
       it "increase answer count by 1" do
@@ -19,7 +19,7 @@ describe AnswersController do
       end
     end
 
-    describe "with invalid attributes" do
+    context "with invalid attributes" do
       it "should redirect if not logged in" do
         post :create
         expect(response).to redirect_to(login_path)
@@ -39,7 +39,7 @@ describe AnswersController do
         @answer = create(:answer)
     }
 
-    describe "valid attributes" do
+    context "valid attributes" do
       it "changes answer body" do
         patch :update, id: @answer,  answer: { body: "change to this", question_id: @question.id, user_id: @user.id }
         @answer.reload
@@ -47,7 +47,7 @@ describe AnswersController do
       end
     end
 
-    describe "invalid attributes" do
+    context "invalid attributes" do
       it "shows error message" do
         patch :update, id: @answer, answer: { body: "", question_id: @question.id, user_id: @user.id }
         @answer.reload
