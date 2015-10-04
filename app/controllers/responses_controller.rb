@@ -13,11 +13,9 @@ class ResponsesController < ApplicationController
       if params[:response][:body] == ""
         flash[:error] = "Response field cannot be empty"
       else
-        question.responses.create(params_response)
-        binding.pry
-
+        user.responses.create(params_response)
       end
-      redirect_to question_path(question)
+      redirect_to question_path(question.id)
     else
       redirect_to login_path
     end
@@ -26,7 +24,7 @@ class ResponsesController < ApplicationController
   private
 
   def params_response
-    params.require(:response).permit(:body, :respondable_id)
+    params.require(:response).permit(:body, :respondable_id,:respondable_type)
   end
 
 end
