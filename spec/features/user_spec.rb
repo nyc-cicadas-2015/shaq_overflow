@@ -83,10 +83,10 @@ describe "View User Index" do
   end
   it "allows users to see other user's index page through links" do
     user1 = create(:user)
-    user2 = create(:user)
     visit root_path
     click_link 'Users'
-    click_link user_path(user1)
+    click_link user1.username
+    # click_link user_path(user1)
     # expect(page).to have_content user1.username
   end
 end
