@@ -3,6 +3,8 @@
 
 <ol>
 	<% @tags.each do |tag| %>
+		<div class="spacer"></div>
 		<%= link_to tag.name, tag_path(tag), :class => "user-show-link"%>
+		<div class="spacer"></div>
 	<% end %>
 </ol>
