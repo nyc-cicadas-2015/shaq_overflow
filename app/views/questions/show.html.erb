@@ -17,6 +17,7 @@
 <ol>
 	<% @question.answers.each do |answer| %>
 		<%= render partial: "answers/show", locals: {answer: answer} %>
+ <%= link_to "Comment here!", new_answer_response_path %>
 	<% end %>
 </ol>
 <div class="spacer"></div>

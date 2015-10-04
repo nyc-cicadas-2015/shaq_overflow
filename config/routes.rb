@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   resources :responses
   resources :answers
 
-  get "/answers/:answer_id/responses/new" => 'responses#new_answer_response', as: 'new_answer_response'
+  get "/answers/:id/responses/new" => 'responses#new_answer_response', as: 'new_answer_response'
 
-  post "/answers/:answer_id/responses" => 'responses#create_answer_response'
+  post "/answers/:id/responses" => 'responses#create_answer_response'
 # get '/responses/:id/edit' => 'responses#edit', as: 'edit_response'
 # delete '/responses/:id' => 'responses#destroy'
 
