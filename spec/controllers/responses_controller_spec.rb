@@ -8,7 +8,8 @@ describe ResponsesController do
   let(:response_attr) { attributes_for(:response) }
   let(:create_response) {
     @question = create(:question)
-    @test_response = @question.responses.create(body: response_attr[:body],user_id: @user.id)
+    @test_response = Response.create(body: response_attr[:body], respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id)
+
   }
 
 
@@ -39,18 +40,19 @@ describe ResponsesController do
     it "renders edit page" do
       log_me_in
       create_response
-      get :edit, id: @test_response.id
+      get :edit, id: @test_response
       response.should render_template :edit
     end
   end
 
   describe "PATCH #update" do
     context "valid attributes" do
-      it "located the requested response" do
+      it "changes response attributes" do
         log_me_in
         create_response
-        patch :update, id: @test_response, response: @test_response
-        assigns(:@test_response).should eq(@test_response)
+        patch :update, id: @test_response, response: { body: "change to this" }
+        @test_response.reload
+        @test_response.body.should eq("change to this")
       end
     end
   end
