@@ -1,19 +1,20 @@
 require "rails_helper"
 
 describe AnswersController do
+  let(:log_me_in) {
+    @user = create(:user)
+    session[:user_id] = @user.id
+    @question = create(:question)
+  }
 
   describe "POST #create" do
 
     describe "with valid attributes" do
-      before(:each) {
-        @user = create(:user)
-        session[:user_id] = @user.id
-        @question = create(:question)
-      }
 
       let(:answer_attr) { attributes_for(:answer) }
 
       it "increase answer count by 1" do
+        log_me_in
         expect {
           post :create, answer: { body: answer_attr[:body], question_id: @question.id, user_id: @user.id }
         }.to change(Answer,:count).by(1)
