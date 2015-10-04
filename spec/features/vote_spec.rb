@@ -15,9 +15,11 @@ describe 'Question Voting process' do
     end
   }
   it "to see upvote button on page" do
-
+  	question = create(:question)
+  	visit root_path
+  	expect(page).to have_button "Upvote"
   end
-  
+
 	# describe 'where user has NOT previously voted' do
 	# end
 	# describe 'that HAS previously voted' do
