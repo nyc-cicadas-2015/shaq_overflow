@@ -19,6 +19,7 @@ describe AnswersController do
           post :create, answer: { body: answer_attr[:body], question_id: @question.id, user_id: @user.id }
         }.to change(Answer,:count).by(1)
       end
+
     end
 
     describe "with invalid attributes" do
@@ -29,10 +30,8 @@ describe AnswersController do
       end
 
       it "sets flash error if field empty" do
-        user = create(:user)
-        question = create(:question)
-        session[:user_id] = user.id
-        post :create, answer: { body: "", question_id: question.id }
+        log_me_in
+        post :create, answer: { body: "", question_id: @question.id }
         expect(flash[:error]).to have_content("Answer field cannot be empty")
       end
 
@@ -41,9 +40,7 @@ describe AnswersController do
 
   describe "PATCH #update" do
     before(:each) {
-        @user = create(:user)
-        session[:user_id] = @user.id
-        @question = create(:question)
+        log_me_in
         @answer = create(:answer)
     }
 
@@ -62,20 +59,25 @@ describe AnswersController do
         expect(flash[:error]).to have_content("Answer field cannot be empty")
       end
     end
+  end
 
-    describe "delete #destroy" do
-      it "deletes answer" do
-        expect {
-        delete :destroy, id: @answer
+  describe "delete #destroy" do
+    before(:each) {
+        log_me_in
+        @answer = create(:answer)
+    }
+
+    it "deletes answer" do
+      expect {
+      delete :destroy, id: @answer
       }.to change(Answer,:count).by(-1)
-      end
-
-      it "redirects to question show page" do
-        delete :destroy, id: @answer
-        response.should redirect_to question_path(@answer.question)
-      end
     end
 
+    it "redirects to question show page" do
+      delete :destroy, id: @answer
+      response.should redirect_to question_path(@answer.question)
+    end
   end
+
 end
 
