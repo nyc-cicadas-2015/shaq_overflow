@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy', :via => :delete
 
   resources :votes, only: [:index, :create]
-  resources :tags, only: [:index, :show, :new, :create]
+  resources :tags, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
