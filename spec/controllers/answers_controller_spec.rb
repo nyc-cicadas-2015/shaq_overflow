@@ -11,7 +11,6 @@ describe AnswersController do
         @question = create(:question)
       }
 
-      let(:question_attr) { attributes_for(:question) }
       let(:answer_attr) { attributes_for(:answer) }
 
       it "increase answer count by 1" do
