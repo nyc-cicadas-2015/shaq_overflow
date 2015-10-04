@@ -8,7 +8,7 @@ class VotesController < ApplicationController
 			if vote_params[:question_id] != nil			
 				question = Question.find_by(id: vote_params[:question_id])
 				if question.votes.where({user_id: session[:user_id]}).count == 0
-					question.votes.create(user_id: session[:user_id])
+					question.votes.create(user_id: session[:user_id]) #I'd like to use merge here if possible
 					flash[:message] = "Thanks for liking the question"
 				else
 					question.votes.find_by(user_id: session[:user_id]).destroy
@@ -25,7 +25,7 @@ class VotesController < ApplicationController
 					answer.votes.find_by(user_id: session[:user_id]).destroy
 					flash[:message] = "You've unliked the answer"
 				end
-				redirect_to question_path(answer.question) #need to change this to question path
+				redirect_to question_path(answer.question)
 
 			elsif vote_params[:response_id] != nil	
 				response = Response.find_by(id: vote_params[:response_id])
@@ -33,8 +33,8 @@ class VotesController < ApplicationController
 					response.votes.create(user_id: session[:user_id])
 					flash[:message] = "Thanks for liking the response"
 				else
-					question.votes.find_by(user_id: session[:user_id]).destroy
-					flash[:message] = "You've unliked the post"
+					response.votes.find_by(user_id: session[:user_id]).destroy
+					flash[:message] = "You've unliked the response"
 				end
 			end
 		else
