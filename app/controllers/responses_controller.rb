@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
 
   def new_answer_response
     if logged_in?
-      @answer = Answer.find_by(id: params[:answer_id])
+      @answer = Answer.find_by(id: params[:id])
       @response = Response.new
     else
       redirect_to login_path
