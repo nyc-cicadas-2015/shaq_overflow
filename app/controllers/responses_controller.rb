@@ -36,6 +36,18 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def destroy
+    response = Response.find_by(id: params[:id])
+    if response.respondable_type == "Question"
+      question_id = response.respondable_id
+      redirect_to question_path(question_id)
+    else
+      answer = Answer.find(response.respondable_id)
+      redirect_to question_path(answer.question)
+    end
+    flash[:delete] = "You have deleted your response"
+    response.destroy
+  end
 
   private
 

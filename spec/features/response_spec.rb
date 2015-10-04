@@ -64,6 +64,15 @@ describe 'response page' do
     expect(page).to have_content response_attr[:body]
   end
 
+  it "can delete a specific response" do
+    question = create(:question)
+    visit question_path(question)
+    response = question.responses.create(body:"Old information",user_id:@user.id)
+    visit question_path(question)
+    click_link("Delete response!")
+    expect(page).to have_content "You have deleted your response"
+  end
+
 
 end
 
