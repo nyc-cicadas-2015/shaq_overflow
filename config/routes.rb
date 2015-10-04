@@ -3,12 +3,16 @@ Rails.application.routes.draw do
 
   resources :users
   resources :answers
-  resources :questions
-  resources :responses
+  # resources :questions
   resources :questions do
     resources :responses
   end
 
+  resources :responses
+
+
+# get '/responses/:id/edit' => 'responses#edit', as: 'edit_response'
+# delete '/responses/:id' => 'responses#destroy'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

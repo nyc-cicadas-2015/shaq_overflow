@@ -6,8 +6,8 @@
 <h4>Responses:</h4>
 <% @question.responses.each do |response| %>
 	<%= response.body %>
-  <% if logged_in? && @response.user_id == current_user.id %>
-  <%=link_to "Edit response", edit_question_response_path(response) %>
+  <% if logged_in? && response.user_id == current_user.id %>
+  <%=link_to "Edit response", edit_response_path(response) %>
   <% end %>
 <% end %>
 <div class="spacer"></div>
