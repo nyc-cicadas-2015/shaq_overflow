@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :users
-  resources :answers
-  # resources :questions
+  resources :answers do
+    resources :responses
+  end
+
   resources :questions do
     resources :responses
   end
