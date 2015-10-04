@@ -86,8 +86,7 @@ describe "View User Index" do
     visit root_path
     click_link 'Users'
     click_link user1.username
-    # click_link user_path(user1)
-    # expect(page).to have_content user1.username
+    expect(page).to have_content user1.name
   end
 end
 
