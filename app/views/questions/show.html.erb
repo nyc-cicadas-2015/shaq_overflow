@@ -33,9 +33,9 @@
 </ol>
 <div class="spacer"></div>
 
-
+<div class="new_answer_holder"></div>
 <h4>Submit a new answer:</h4>
-<%= form_for @answer, html: { id: 'answer_form' } do |f| %>
+<%= form_for @answer do |f| %>
   <%= f.hidden_field :question_id, value: params[:id] %>
   <%= f.label :answer %>
   <%= f.text_field :body %>
