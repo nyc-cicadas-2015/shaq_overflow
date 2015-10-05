@@ -13,8 +13,15 @@ describe ResponsesController do
   }
 
 
-  # describe "GET #new" do
-  # end
+  describe "GET #new" do
+
+    it "renders the new template" do
+      log_me_in
+      new_question = create(:question)
+      get :new, question_id: new_question.id
+      expect(response).to render_template("new")
+    end
+  end
 
   # describe "POST #create" do
   #   context "valid attributes" do
