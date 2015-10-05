@@ -73,6 +73,14 @@ describe ResponsesController do
         expect(flash[:error]).to have_content("Response field cannot be empty")
       end
 
+      it "does not change response attributes" do
+        log_me_in
+        create_response
+        patch :update, id: @test_response, response: { body: "" }
+        @test_response.reload
+        @test_response.body.should_not eq("")
+      end
+
       it "not redirect to question page" do
         log_me_in
         create_response
