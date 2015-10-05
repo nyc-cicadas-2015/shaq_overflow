@@ -41,6 +41,11 @@ describe ResponsesController do
           post :create, question_id: @question.id, response: { body: "", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
           }.to_not change(Response,:count)
       end
+
+      it "return error if field empty" do
+        post :create, question_id: @question.id, response: {body: "", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
+        expect(flash[:error]).to have_content("Response field cannot be empty")
+      end
     end
   end
 
