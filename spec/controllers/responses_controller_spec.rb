@@ -64,23 +64,42 @@ describe ResponsesController do
       end
     end
 
-    # context "invalid attributes" do
-    #   it "shows error message if empty" do
-    #     log_me_in
-    #     create_response
-    #     patch :update, id: @test_response, response: { body: "" }
-    #     @test_response.reload
-    #     expect(flash[:error]).to have_content("Response field cannot be empty")
-    #   end
+    context "invalid attributes" do
+      before(:each) {
+        log_me_in
+        create_response
+      }
 
-    #   it "re-renders edit page" do
-    #     log_me_in
-    #     create_responses
-    #     patch :update, id: @test_response, response: { body: "" }
-    #     response.should render_template :edit
-    #   end
-    # end
+      it "shows error message if empty" do
+        patch :update, id: @test_response, response: { body: "" }
+        @test_response.reload
+        expect(flash[:error]).to have_content("Response field cannot be empty")
+      end
+
+      it "does not change response attributes" do
+        patch :update, id: @test_response, response: { body: "" }
+        @test_response.reload
+        @test_response.body.should_not eq("")
+      end
+
+      it "not redirect to question page" do
+        patch :update, id: @test_response, response: { body: "" }
+        expect(response).to redirect_to edit_response_path(@test_response)
+      end
+    end
   end
 
+  # describe 'DELETE #destroy' do
+  #   before :each {
+  #     log_me_in
+  #     create_response
+  #   }
+
+  #   it "deletes the response" do
+  #     expect {
+  #       delete :destroy, id: @test_response
+  #       }.to change(Response, :count).by(-1)
+  #   end
+  # end
+
 end
-# { body: "update me", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
