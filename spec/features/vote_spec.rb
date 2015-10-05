@@ -30,7 +30,7 @@ describe 'Question Voting process' do
 	  	question = create(:question)
 	  	visit root_path
 	  	click_button "Upvote"
-	  	expect(page).to have_content("Thanks for liking the question")
+	  	expect(page).to have_content("Thanks for liking the Question")
 	  end
 
 	  it "flash message tells user they've unliked the question" do
@@ -39,7 +39,7 @@ describe 'Question Voting process' do
 	  	visit root_path
 	  	click_button "Upvote"
 	  	click_button "Upvote"
-	  	expect(page).to have_content("You've unliked the question")
+	  	expect(page).to have_content("You've unliked the Question")
 	  end
 	end
 end
