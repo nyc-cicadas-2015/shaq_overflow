@@ -12,6 +12,7 @@ describe "answers" do
       click_button 'Login'
     end
   }
+
   describe "create answers" do
     it "can create answer to question" do
       log_me_in
@@ -42,7 +43,6 @@ describe "answers" do
       expect(question_path(question)).to_not have_content("this shouldn't show up!")
     end
   end
-
 
   describe "edit answer" do
     before :each do
