@@ -81,6 +81,16 @@ describe 'response page' do
     expect(page).to have_content 'Create a new response'
   end
 
+  it "can submit a response for answer" do
+    answer = create(:answer)
+    visit question_path(answer.question)
+    click_link "Comment here!"
+    within("#new_response") do
+      fill_in 'response_body', :with => response_attr[:body]
+    end
+    click_button 'Post response!'
+    expect(page).to have_content response_attr[:body]
+end
 
 
 
