@@ -65,25 +65,24 @@ describe ResponsesController do
     end
 
     context "invalid attributes" do
-      it "shows error message if empty" do
+      before(:each) {
         log_me_in
         create_response
+      }
+
+      it "shows error message if empty" do
         patch :update, id: @test_response, response: { body: "" }
         @test_response.reload
         expect(flash[:error]).to have_content("Response field cannot be empty")
       end
 
       it "does not change response attributes" do
-        log_me_in
-        create_response
         patch :update, id: @test_response, response: { body: "" }
         @test_response.reload
         @test_response.body.should_not eq("")
       end
 
       it "not redirect to question page" do
-        log_me_in
-        create_response
         patch :update, id: @test_response, response: { body: "" }
         expect(response).to redirect_to edit_response_path(@test_response)
       end
@@ -91,4 +90,3 @@ describe ResponsesController do
   end
 
 end
-# { body: "update me", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
