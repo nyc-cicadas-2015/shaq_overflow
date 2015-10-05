@@ -111,7 +111,7 @@
 
 /* Making the header responsive */
 
-@media all and (max-width: 785px) {
+@media all and (max-width: 740px) {
 	.header-login-signup {
 		padding: 25px;
 		height: 85px;
