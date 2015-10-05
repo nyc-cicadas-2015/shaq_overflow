@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  # Please ensure you do not indent with <tab>s!
 	def new
 		@user = User.new
 	end
@@ -22,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   private
-  
+
   def session_params
     params.require(:session).permit(:username, :password)
   end

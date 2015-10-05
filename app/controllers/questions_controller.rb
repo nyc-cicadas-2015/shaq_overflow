@@ -19,11 +19,20 @@ class QuestionsController < ApplicationController
   def create
     if current_user
       question = current_user.questions.build(question_params)
-      if question.check_for_empty_fields?
+
+      if question.check_for_empty_fields? # Use AR validations for this!
         flash[:input] = "Please input information"
         redirect_to new_question_path
       else
         question.save
+
+        # I'd probably allow Tag.make_tags to do nothing if passed a nil option
+        # for the first param, so that you can just call make_tags regardless
+        # of whether tag_params were passed:
+        #
+        # Tag.make_tags(tag_params.try(:name), question)
+        # nil.try(:authenticate)
+
         if tag_params != nil
           Tag.make_tags(tag_params[:name], question)
         end
@@ -63,6 +72,12 @@ def question_params
 end
 
  def tag_params
+  # params = {
+  #   question: {
+  #     tag: {
+  #       name: ''
+  #     }
+  #   }
    params.require(:question).require(:tag).permit(:name)
  end
 

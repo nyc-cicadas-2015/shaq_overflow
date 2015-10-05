@@ -10,12 +10,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # What are these <tab>s doing here?
 	def logged_in?
 	  session[:user_id]
 	end
 
+  # I like that you've done this!  I may take this a step further and move it
+  # into a controller concern (votable) which you can include in any controllers
+  # that are Votable.  This will limit the scope of your method to be included
+  # only where appropriate.
+  #
   def find_associated_object(vote_params)
-    if vote_params[:question_id] != nil   
+    if vote_params[:question_id] != nil
       voting_subject = Question.find_by(id: vote_params[:question_id])
     elsif vote_params[:answer_id] != nil
       voting_subject = Answer.find_by(id: vote_params[:answer_id])
@@ -26,7 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_associated_redirect_path(vote_params, voting_subject)
-    if vote_params[:question_id] != nil   
+    if vote_params[:question_id] != nil
       proper_path = root_path
     elsif vote_params[:answer_id] != nil
       proper_path = question_path(voting_subject.question)

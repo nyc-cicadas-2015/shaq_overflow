@@ -6,6 +6,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :responses, as: :respondable
 
+  # Use AR validations!!!!!
+  # validates :title, :body, presence: true
   def check_for_empty_fields?
     self.title == "" || self.body == ""
   end

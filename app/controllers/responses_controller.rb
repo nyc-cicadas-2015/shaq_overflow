@@ -1,4 +1,18 @@
 class ResponsesController < ApplicationController
+  # I _think_ that all of these methods require a logged in user to function
+  # properly.  I would likely use a before action instead of checking it in each
+  # method.  This will clean up your controller methods quite a bit:
+  #
+  # before_action :require_login, except: [:index, :show]
+  #
+  # private
+  #
+  # def require_login
+  #   unless logged_in?
+  #     flash[:error] = 'You must be logged in to perform this action!'
+  #     redirect_to login_path
+  #   end
+  # end
 
   def new
     if logged_in?

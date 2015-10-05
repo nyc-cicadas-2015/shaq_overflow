@@ -1,17 +1,19 @@
 $(document).ready(function() {
   $('#new_answer').on('submit', function(event) {
     event.preventDefault();
-    console.log("ajax working");
+    // console.log("ajax working");
 
     $.ajax({
       method: 'POST',
       url: event.target.action,
-      data: $(event.target).serialize()
+      data: $(event.target).serialize(),
+      dataType: 'json'
     }).done(function(data) {
+      // console.log(data)
       $(".new_answer_holder").append(data);
       $("#answer_body").val("");
-    }).fail(function(){
-      console.log("ajax failed");
+    }).fail(function(data){
+      console.log("ajax failed: " + data);
     })
   })
 })

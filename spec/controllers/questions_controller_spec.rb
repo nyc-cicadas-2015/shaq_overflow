@@ -40,9 +40,19 @@ describe QuestionsController do
     }
 
     context "with valid attributes" do
-      xit "saves the new contact in the database" do
+      it "saves the new contact in the database" do
+        # Hash#merge
+
+        # a = { name: 'chris' }
+        # b = { last_name: 'dimartino'}
+        # c = a.merge(b)
+        # c = {
+        #   name: 'chris',
+        #   last_name: 'dimartino'
+        # }
+
         expect{
-          post :create, question:attributes_for(:question) # , tag_params:attributes_for(:tag)
+          post :create, question: attributes_for(:question).merge(tag: { name: '' }) # , tag_params:attributes_for(:tag)
           }.to change(Question,:count).by(1)
         end
       end

@@ -40,6 +40,7 @@ describe "answers" do
         fill_in 'answer_body', :with => "this shouldn't show up!"
       end
       click_button 'Post answer'
+      ## Check your expectations here!
       expect(question_path(question)).to_not have_content("this shouldn't show up!")
     end
   end

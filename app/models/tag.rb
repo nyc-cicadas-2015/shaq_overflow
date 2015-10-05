@@ -5,6 +5,10 @@ class Tag < ActiveRecord::Base
   def self.make_tags(tags, question)
     tag_array = tags.split(" ")
     tag_array.each do |new_tag|
+      # Tag.find_or_create(name: new_tag) {
+      #   name: new_tag,
+      #   location: here
+      # }
     	existing_tag = Tag.find_by(name: new_tag)
     	if existing_tag
     		question.tags.push(existing_tag)
