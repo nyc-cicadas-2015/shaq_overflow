@@ -9,6 +9,7 @@ $(document).ready(function() {
       data: $(event.target).serialize()
     }).done(function(data) {
       $(".new_answer_holder").append(data);
+      $("#answer_body").val("");
     }).fail(function(){
       console.log("ajax failed");
     })
