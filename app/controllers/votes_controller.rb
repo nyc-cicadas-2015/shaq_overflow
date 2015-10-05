@@ -5,18 +5,8 @@ class VotesController < ApplicationController
 
 	def create
 		if logged_in?
-			if vote_params[:question_id] != nil		
-				voting_subject = Question.find_by(id: vote_params[:question_id])
-				proper_path = root_path
-			elsif vote_params[:answer_id] != nil
-				voting_subject = Answer.find_by(id: vote_params[:answer_id])
-				proper_path = question_path(voting_subject.question)
-			elsif vote_params[:response_id] != nil
-				voting_subject = Response.find_by(id: vote_params[:response_id])
-				proper_path = "undetermined for now"
-			else
-				redirect_to login_path
-			end
+			voting_subject = find_associated_object(vote_params)
+			proper_path = find_associated_redirect_path(vote_params, voting_subject)
 			if voting_subject.votes.where({user_id: session[:user_id]}).count == 0
 				voting_subject.votes.create(user_id: session[:user_id])
 				flash[:message] = "Thanks for liking the #{voting_subject.class}"
