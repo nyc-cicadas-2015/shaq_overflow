@@ -17,7 +17,7 @@ describe 'response page' do
 
   let(:response_attr){attributes_for(:response)}
 
-  it "to see if new response form is on correct page" do
+  it "to see if new response form is on correct page for a question" do
     question = create(:question)
     visit question_path(question)
     click_link "Comment"
@@ -33,7 +33,7 @@ describe 'response page' do
   end
 
 
-  it "to see if we can create a response" do
+  it "to see if we can create a response for a question" do
     question = create(:question)
     visit question_path(question)
     click_link "Comment"
@@ -74,12 +74,23 @@ describe 'response page' do
     expect(page).to have_content "You have deleted your response"
   end
 
-  #  it "to see if new response form is on correct page" do
-  #   answer = create(:answer)
-  #   visit question_path(answer.question)
-  #   click_link "Comment here!"
-  #   expect(page).to have_content 'Create a new response'
-  # end
+   it "to see if  response form for answer is on correct page" do
+    answer = create(:answer)
+    visit question_path(answer.question)
+    click_link "Comment here!"
+    expect(page).to have_content 'Create a new response'
+  end
+
+  it "can submit a response for answer" do
+    answer = create(:answer)
+    visit question_path(answer.question)
+    click_link "Comment here!"
+    within("#new_response") do
+      fill_in 'response_body', :with => response_attr[:body]
+    end
+    click_button 'Post response!'
+    expect(page).to have_content response_attr[:body]
+end
 
 
 
