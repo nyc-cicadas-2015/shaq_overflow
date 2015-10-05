@@ -89,17 +89,17 @@ describe ResponsesController do
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   before :each {
-  #     log_me_in
-  #     create_response
-  #   }
+  describe 'DELETE #destroy' do
+    before(:each) {
+      log_me_in
+      create_response
+    }
 
-  #   it "deletes the response" do
-  #     expect {
-  #       delete :destroy, id: @test_response
-  #       }.to change(Response, :count).by(-1)
-  #   end
-  # end
+    it "deletes response" do
+      expect {
+        delete :destroy, id: @test_response
+        }.to change(Response,:count).by(-1)
+    end
+  end
 
 end
