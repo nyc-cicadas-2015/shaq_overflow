@@ -8,8 +8,9 @@ $(document).ready(function() {
       url: event.target.action,
       data: $(event.target).serialize()
     }).done(function(data) {
-      console.log("werks");
-
+      $(".new_answer_holder").append(data);
+    }).fail(function(){
+      console.log("ajax failed");
     })
   })
 })

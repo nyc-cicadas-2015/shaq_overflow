@@ -14,6 +14,9 @@
 			<%= f.submit "Upvote" %>
   	<% end %>
 	<% end %>
+	<% if answer.id %>
+ 		<%= link_to "Comment here!", "/answers/#{answer.id}/responses/new" %>
+ 	<% end %>
 </li>
 <% end %>
 

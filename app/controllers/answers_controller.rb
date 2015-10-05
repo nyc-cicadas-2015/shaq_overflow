@@ -12,9 +12,13 @@ class AnswersController < ApplicationController
       if params[:answer][:body] == ""
         flash[:error] = "Answer field cannot be empty"
       else
-        user.answers.create(params_answer)
+        @answer = user.answers.create(params_answer)
       end
-      redirect_to question_path(question)
+      if request.xhr?
+        render partial: "answers/show", locals: {answer: @answer}, layout: false
+      else
+        redirect_to question_path(question)
+      end
     else
       redirect_to login_path
     end
