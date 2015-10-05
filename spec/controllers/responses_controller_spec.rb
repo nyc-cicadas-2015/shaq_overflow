@@ -6,39 +6,53 @@ describe ResponsesController do
     session[:user_id] = @user.id
   }
   let(:response_attr) { attributes_for(:response) }
+  let(:create_question) { @question = create(:question) }
+  let(:create_answer) { @answer = create(:answer)}
   let(:create_response) {
-    @question = create(:question)
     @test_response = Response.create(body: response_attr[:body], respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id)
-
   }
 
 
-  # describe "GET #new" do
-  # end
+  describe "GET #new" do
+    it "renders new response template for question" do
+      log_me_in
+      create_question
+      get :new, question_id: @question.id
+      expect(response).to render_template("new")
+    end
+  end
 
-  # describe "POST #create" do
-  #   context "valid attributes" do
-  #     it "creates new response" do
-  #       log_me_in
-  #       expect {
-  #         post :create, response: { body: response[:body], respondable_id: @question.id, respondable_type: @question.class, user_id: response[:user] }
-  #       }.to change(Response,:count).by(1)
-  #     end
-  #   end
+  describe "POST #create" do
+    before(:each) {
+      log_me_in
+      create_question
+    }
+    context "valid attributes" do
+      it "creates new response for question" do
+        expect {
+          post :create, question_id: @question.id, response: { body: response_attr[:body], respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
+        }.to change(Response,:count).by(1)
+      end
+    end
 
-  #   context "invalid attributes" do
-  #     it "does not create response if field empty" do
-  #       log_me_in
-  #       expect {
-  #         post :create, response: { body: "", respondable_id: @question.id, respondable_type: @question.class, user_id: response[:user] }
-  #         }.to_not change(Response,:count)
-  #     end
-  #   end
-  # end
+    context "invalid attributes" do
+      it "does not create response if field empty" do
+        expect {
+          post :create, question_id: @question.id, response: { body: "", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
+          }.to_not change(Response,:count)
+      end
+
+      it "return error if field empty" do
+        post :create, question_id: @question.id, response: {body: "", respondable_id: @question.id, respondable_type: @question.class, user_id: @user.id }
+        expect(flash[:error]).to have_content("Response field cannot be empty")
+      end
+    end
+  end
 
   describe "GET #edit" do
     it "renders edit page" do
       log_me_in
+      create_question
       create_response
       get :edit, id: @test_response
       response.should render_template :edit
@@ -49,6 +63,7 @@ describe ResponsesController do
     context "valid attributes" do
       before(:each) {
         log_me_in
+        create_question
         create_response
       }
 
@@ -67,6 +82,7 @@ describe ResponsesController do
     context "invalid attributes" do
       before(:each) {
         log_me_in
+        create_question
         create_response
       }
 
@@ -89,17 +105,18 @@ describe ResponsesController do
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   before :each {
-  #     log_me_in
-  #     create_response
-  #   }
+  describe 'DELETE #destroy' do
+    before(:each) {
+      log_me_in
+      create_question
+      create_response
+    }
 
-  #   it "deletes the response" do
-  #     expect {
-  #       delete :destroy, id: @test_response
-  #       }.to change(Response, :count).by(-1)
-  #   end
-  # end
+    it "deletes response" do
+      expect {
+        delete :destroy, id: @test_response
+        }.to change(Response,:count).by(-1)
+    end
+  end
 
 end
