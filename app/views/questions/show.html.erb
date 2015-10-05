@@ -26,7 +26,9 @@
     <%= link_to "Edit response!", edit_response_path(response) %>
     <%= link_to "Delete response",  response,  method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
+    <% if answer.id %>
  <%= link_to "Comment here!", "/answers/#{answer.id}/responses/new" %>
+ <% end %>
 	<% end %>
 </ol>
 <div class="spacer"></div>
