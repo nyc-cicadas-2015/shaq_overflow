@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @tag = Tag.new
     @answer = Answer.new
     @response = Response.new
   end
@@ -23,6 +24,9 @@ class QuestionsController < ApplicationController
         redirect_to new_question_path
       else
         question.save
+        if tag_params != nil
+          Tag.make_tags(tag_params[:name], question)
+        end
         redirect_to root_path
       end
     else
@@ -57,5 +61,9 @@ private
 def question_params
   params.require(:question).permit(:body,:title)
 end
+
+ def tag_params
+   params.require(:question).require(:tag).permit(:name)
+ end
 
 end

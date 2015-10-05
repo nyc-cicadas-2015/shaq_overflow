@@ -1,6 +1,7 @@
 <li>
   <%= link_to question.title, question_path(question) %>
   <p> current vote count: <%= question.votes.count %></p>
+	<h6> written by <%=question.user.username%></h6>
   <% if logged_in? %>
   	<%= form_for [@votable, Vote.new] do |f| %>
 			<%= f.hidden_field :question_id, value: question.id %>
