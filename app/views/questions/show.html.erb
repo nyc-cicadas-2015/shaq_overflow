@@ -26,13 +26,11 @@
     <%= link_to "Edit response!", edit_response_path(response) %>
     <%= link_to "Delete response",  response,  method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-    <% if answer.id %>
- <%= link_to "Comment here!", "/answers/#{answer.id}/responses/new" %>
- <% end %>
+
 	<% end %>
+  <div class="new_answer_holder"></div>
 </ol>
 <div class="spacer"></div>
-
 
 <h4>Submit a new answer:</h4>
 <%= form_for @answer do |f| %>
