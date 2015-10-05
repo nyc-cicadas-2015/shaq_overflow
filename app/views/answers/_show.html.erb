@@ -1,6 +1,8 @@
+<% if answer.user %>
 <li>
 	<%= answer.body %>
 	<p>current vote count: <%= answer.votes.count%></p>
+		<p>written by: <%=answer.user.username%></p>
 	<% if logged_in? %>
 		<% if answer.user_id == current_user.id %>
 		  <%= link_to "Edit answer", edit_answer_path(answer) %>
@@ -13,5 +15,6 @@
   	<% end %>
 	<% end %>
 </li>
+<% end %>
 
 
